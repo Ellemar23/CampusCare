@@ -19,8 +19,8 @@
 
         <ImageButton
             android:id="@+id/man_Icon"
-            android:layout_width="71dp"
-            android:layout_height="67dp"
+            android:layout_width="89dp"
+            android:layout_height="75dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="52dp"
             android:background="?attr/selectableItemBackgroundBorderless"
@@ -44,11 +44,25 @@
             app:layout_constraintTop_toTopOf="@id/man_Icon"
             app:layout_constraintVertical_bias="0.627" />
 
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="24dp"
+            android:text="user name"
+            android:textColor="#0D47A1"
+            android:textSize="17.5sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/man_Icon"
+            app:layout_constraintTop_toBottomOf="@+id/welcome_text" />
+
         <ImageButton
             android:id="@+id/notification_icon"
             android:layout_width="54dp"
             android:layout_height="51dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Notifications"
             android:minHeight="50dp"
