@@ -1,4 +1,4 @@
-package com.example.campuscare;
+package com.example.CampusCare;
 
 import java.io.Serializable;
 
