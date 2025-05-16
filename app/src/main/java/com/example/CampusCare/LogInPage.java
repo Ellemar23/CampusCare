@@ -53,9 +53,6 @@ public class LogInPage extends AppCompatActivity {
             if (passStr.isEmpty()) {
                 password.setError("Please enter your password");
                 return;
-            } else if (passStr.length() < 8) {
-                password.setError("Password must be at least 8 characters");
-                return;
             }
 
             if (emailStr.equals("admin@gmail.com") && passStr.equals("admin1234")) {
@@ -100,7 +97,7 @@ public class LogInPage extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> map = new HashMap<>();
                 map.put("email", emailStr);
-                map.put("Password", passStr);
+                map.put("password", passStr);
                 return map;
             }
         };

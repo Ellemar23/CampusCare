@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".HomePage">
 
+    <!-- Bottom Navigation -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,12 +18,13 @@
 
         <!-- Notification Icon -->
 
+
         <ImageButton
             android:id="@+id/man_Icon"
             android:layout_width="89dp"
             android:layout_height="75dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="56dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Profile Icon"
             android:scaleType="centerInside"
@@ -34,35 +36,34 @@
             android:id="@+id/welcome_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:text="Welcome to CampusCare!"
             android:textColor="#0D47A1"
-            android:textSize="17.5sp"
+            android:textSize="15.5sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/man_Icon"
             app:layout_constraintStart_toEndOf="@id/man_Icon"
             app:layout_constraintTop_toTopOf="@id/man_Icon"
-            app:layout_constraintVertical_bias="0.627" />
-
+            app:layout_constraintVertical_bias="0.96" />
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="24dp"
+            android:layout_width="84dp"
+            android:layout_height="19dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:text="user name"
             android:textColor="#0D47A1"
-            android:textSize="17.5sp"
+            android:textSize="10dp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/man_Icon"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/welcome_text" />
 
         <ImageButton
             android:id="@+id/notification_icon"
             android:layout_width="54dp"
             android:layout_height="51dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="12dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Notifications"
             android:minHeight="50dp"
@@ -70,18 +71,18 @@
             android:src="@drawable/notification_bell"
             app:layout_constraintBottom_toBottomOf="@id/man_Icon"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/man_Icon"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.137" />
 
         <View
             android:id="@+id/notification_badge"
             android:layout_width="12dp"
             android:layout_height="12dp"
-            android:background="@drawable/red_dot"
-            android:layout_marginEnd="4dp"
             android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/red_dot"
             app:layout_constraintEnd_toEndOf="@id/notification_icon"
-            app:layout_constraintTop_toTopOf="@id/notification_icon"/>
+            app:layout_constraintTop_toTopOf="@id/notification_icon" />
 
         <!-- Appointment Card -->
 
@@ -172,60 +173,59 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            app:layout_constraintTop_toBottomOf="@id/document_card"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/document_card">
 
             <Button
                 android:id="@+id/btn_book_appointment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Book Appointment"
                 android:backgroundTint="#1E88E5"
+                android:text="Book Appointment"
                 android:textColor="#FFFFFF"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/btn_my_documents"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/btn_my_documents"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="My Documents"
                 android:backgroundTint="#43A047"
+                android:text="My Documents"
                 android:textColor="#FFFFFF"
-                app:layout_constraintStart_toEndOf="@id/btn_book_appointment"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_book_appointment"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/btn_messages"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Messages"
+                android:layout_marginTop="8dp"
                 android:backgroundTint="#1E88E5"
+                android:text="Messages"
                 android:textColor="#FFFFFF"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/btn_health_info"
-                app:layout_constraintTop_toBottomOf="@id/btn_book_appointment"
-                android:layout_marginTop="8dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_book_appointment" />
 
             <Button
                 android:id="@+id/btn_health_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Health Info"
+                android:layout_marginTop="8dp"
                 android:backgroundTint="#43A047"
+                android:text="Health Info"
                 android:textColor="#FFFFFF"
-                app:layout_constraintStart_toEndOf="@id/btn_messages"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_my_documents"
-                android:layout_marginTop="8dp" />
+                app:layout_constraintStart_toEndOf="@id/btn_messages"
+                app:layout_constraintTop_toBottomOf="@id/btn_my_documents" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"

@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
 
 public class MedicalHistoryAdapter extends RecyclerView.Adapter<MedicalHistoryAdapter.ViewHolder> {
@@ -28,6 +30,7 @@ public class MedicalHistoryAdapter extends RecyclerView.Adapter<MedicalHistoryAd
 
     @Override
     public MedicalHistoryAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        // Fix: remove space in getContext()
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_medical_history, parent, false);
         return new ViewHolder(view);
     }
@@ -35,14 +38,12 @@ public class MedicalHistoryAdapter extends RecyclerView.Adapter<MedicalHistoryAd
     @Override
     public void onBindViewHolder(MedicalHistoryAdapter.ViewHolder holder, int position) {
         MedicalHistory history = medicalHistoryList.get(position);
-
         holder.tvDate.setText(history.getDateCreated());
 
         holder.itemView.setOnClickListener(v -> {
             Context context = v.getContext();
             Intent intent = new Intent(context, ViewmedicalInfo.class);
             intent.putExtra("dateCreated", history.getDateCreated());
-            intent.putExtra("name", history.getName());
             context.startActivity(intent);
         });
     }

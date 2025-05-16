@@ -2,14 +2,21 @@ package com.example.CampusCare;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +39,9 @@ public class AddMedicalInfornation extends AppCompatActivity {
         etMedications = findViewById(R.id.etMedications);
         btnSave = findViewById(R.id.btnSave);
 
+        SharedPreferences prefs = getSharedPreferences("CampusCarePrefs", MODE_PRIVATE);
+        String userId = prefs.getString("user_id", "-1");
+
         etDOB.setOnClickListener(v -> showDatePicker());
 
         btnSave.setOnClickListener(v -> {
@@ -47,7 +57,7 @@ public class AddMedicalInfornation extends AppCompatActivity {
                 return;
             }
 
-            saveMedicalInfo(name, dob, bloodType, medicalConditions, allergies, medications);
+            saveMedicalInfo(userId, name, dob, bloodType, medicalConditions, allergies, medications);
         });
     }
 
@@ -55,7 +65,7 @@ public class AddMedicalInfornation extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         DatePickerDialog dialog = new DatePickerDialog(this,
                 (DatePicker view, int year, int month, int dayOfMonth) -> {
-                    String dob = dayOfMonth + "/" + (month + 1) + "/" + year;
+                    String dob = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth);
                     etDOB.setText(dob);
                 },
                 calendar.get(Calendar.YEAR),
@@ -64,33 +74,39 @@ public class AddMedicalInfornation extends AppCompatActivity {
         dialog.show();
     }
 
-    private void saveMedicalInfo(String name, String dob, String bloodType, String medicalConditions, String allergies, String medications) {
-        // Get user_id from SharedPreferences
-        String userId = getSharedPreferences("CampusCarePrefs", MODE_PRIVATE)
-                .getString("user_id", null);
-
-        if (userId == null) {
+    private void saveMedicalInfo(String userId, String name, String dob, String bloodType,
+                                 String medicalConditions, String allergies, String medications) {
+        if (userId.equals("-1")) {
             Toast.makeText(this, "User not logged in. Please login again.", Toast.LENGTH_SHORT).show();
-            // Optionally, redirect to login page
             Intent intent = new Intent(AddMedicalInfornation.this, LogInPage.class);
             startActivity(intent);
             finish();
             return;
         }
 
-        StringRequest request = new StringRequest(Request.Method.POST, endpoints.SaveMedicalInfo,
+        StringRequest request = new StringRequest(Request.Method.POST, endpoints.MedicalInfo + "?action=add",
                 response -> {
-                    Toast.makeText(this, "Information saved successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(AddMedicalInfornation.this, MedicalInformation.class);
-                    startActivity(intent);
-                    finish();
+                    try {
+                        JSONObject obj = new JSONObject(response);
+                        if (obj.getBoolean("success")) {
+                            Toast.makeText(this, "Information saved successfully", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(AddMedicalInfornation.this, MedicalInformation.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(this, "Failed: " + obj.getString("message"), Toast.LENGTH_LONG).show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(this, "Response parse error", Toast.LENGTH_SHORT).show();
+                    }
                 },
-                error -> Toast.makeText(this, "Failed to save information", Toast.LENGTH_SHORT).show()
+                error -> Toast.makeText(this, "Volley error: " + error.getMessage(), Toast.LENGTH_LONG).show()
         ) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("user_id", userId); // add user_id param here
+                params.put("user_id", userId);
                 params.put("name", name);
                 params.put("dob", dob);
                 params.put("bloodType", bloodType);

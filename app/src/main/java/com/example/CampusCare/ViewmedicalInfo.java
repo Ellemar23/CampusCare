@@ -1,13 +1,18 @@
 package com.example.CampusCare;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,25 +25,34 @@ public class ViewmedicalInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewmedicalinfo);
 
-        fullname = findViewById(R.id.fullname);
-        dob = findViewById(R.id.birthdate);
-        bloodType = findViewById(R.id.address);
-        medicalConditions = findViewById(R.id.illnesses);
-        allergies = findViewById(R.id.past_surgeries);
-        medications = findViewById(R.id.currentmed);
+        fullname = findViewById(R.id.tvFullName);
+        dob = findViewById(R.id.tvDOB);
+        bloodType = findViewById(R.id.tvBloodType);
+        medicalConditions = findViewById(R.id.tvMedicalConditions);
+        allergies = findViewById(R.id.tvAllergies);
+        medications = findViewById(R.id.tvMedications);
 
-        // Receive ID from intent
-       // int id = getIntent().getIntExtra("id", -1);
-        int id = 0;
+        SharedPreferences prefs = getSharedPreferences("CampusCarePrefs", MODE_PRIVATE);
+        String userIdStr = prefs.getString("user_id", "-1");
 
-        if (id != -1) {
-            fetchMedicalInfo(id);
-        } else {
-            Toast.makeText(this, "Invalid entry ID", Toast.LENGTH_SHORT).show();
+        if (userIdStr.equals("-1")) {
+            Toast.makeText(this, "User not logged in. Please login again.", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
         }
+
+        int userId = Integer.parseInt(userIdStr);
+        fetchMedicalInfo(userId);
     }
 
-    private void fetchMedicalInfo(int id) {
+    private void fetchMedicalInfo(int userId) {
+        String date = getIntent().getStringExtra("dateCreated");
+        if (date == null) {
+            Toast.makeText(this, "No date specified.", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
         StringRequest request = new StringRequest(Request.Method.POST, endpoints.MedicalInfo + "?action=get",
                 response -> {
                     try {
@@ -52,19 +66,20 @@ public class ViewmedicalInfo extends AppCompatActivity {
                             allergies.setText(data.getString("allergies"));
                             medications.setText(data.getString("medications"));
                         } else {
-                            Toast.makeText(this, obj.getString("message"), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Data not found for this record.", Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        Toast.makeText(this, "Error parsing details", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Error parsing data", Toast.LENGTH_SHORT).show();
                     }
                 },
-                error -> Toast.makeText(this, "Error fetching details", Toast.LENGTH_SHORT).show()
+                error -> Toast.makeText(this, "Network error: " + error.getMessage(), Toast.LENGTH_SHORT).show()
         ) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("user_id", String.valueOf(id));
+                params.put("user_id", String.valueOf(userId));
+                params.put("date", date);
                 return params;
             }
         };
