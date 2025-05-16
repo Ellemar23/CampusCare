@@ -19,8 +19,8 @@ public class endpoints {
     public static final String DeleteMedicalInfo = BASE_URL + "medicalInfo.php?action=delete";
     public static final String UpdateMedicalInfo = BASE_URL + "medicalInfo.php?action=update";
 
-    public static final String SendMessage = BASE_URL + "sendMessage.php";
-    public static final String GetMessageList = BASE_URL + "message.php?action=list";
+    public static final String SendMessage = BASE_URL + "message.php?action=send";
+    public static final String GetMessage = BASE_URL + "message.php?action=list";
     public static final String MessageDetails = BASE_URL + "message.php?action=get";
     public static final String DeleteMessage = BASE_URL + "message.php?action=delete";
     public static final String UpdateMessage = BASE_URL + "message.php?action=update";
