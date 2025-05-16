@@ -65,10 +65,22 @@ public class AddMedicalInfornation extends AppCompatActivity {
     }
 
     private void saveMedicalInfo(String name, String dob, String bloodType, String medicalConditions, String allergies, String medications) {
+        // Get user_id from SharedPreferences
+        String userId = getSharedPreferences("CampusCarePrefs", MODE_PRIVATE)
+                .getString("user_id", null);
+
+        if (userId == null) {
+            Toast.makeText(this, "User not logged in. Please login again.", Toast.LENGTH_SHORT).show();
+            // Optionally, redirect to login page
+            Intent intent = new Intent(AddMedicalInfornation.this, LogInPage.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         StringRequest request = new StringRequest(Request.Method.POST, endpoints.SaveMedicalInfo,
                 response -> {
                     Toast.makeText(this, "Information saved successfully", Toast.LENGTH_SHORT).show();
-                    // Go back to list after saving
                     Intent intent = new Intent(AddMedicalInfornation.this, MedicalInformation.class);
                     startActivity(intent);
                     finish();
@@ -78,6 +90,7 @@ public class AddMedicalInfornation extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
+                params.put("user_id", userId); // add user_id param here
                 params.put("name", name);
                 params.put("dob", dob);
                 params.put("bloodType", bloodType);
