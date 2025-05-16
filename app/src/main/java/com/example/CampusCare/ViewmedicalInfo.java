@@ -3,65 +3,68 @@ package com.example.CampusCare;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class ViewmedicalInfo extends AppCompatActivity {
 
     TextView fullname, dob, bloodType, medicalConditions, allergies, medications;
-    String Name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewmedicalinfo);
 
-        // Match these with your actual XML IDs
-        fullname = findViewById(R.id.fullname); // matches
-        dob = findViewById(R.id.birthdate); // changed from R.id.dob to R.id.birthdate
-        bloodType = findViewById(R.id.address); // assuming bloodType mapped to address field
-        medicalConditions = findViewById(R.id.illnesses); // matches illness info
-        allergies = findViewById(R.id.past_surgeries); // assuming this represents allergies
-        medications = findViewById(R.id.currentmed); // matches current medications
+        fullname = findViewById(R.id.fullname);
+        dob = findViewById(R.id.birthdate);
+        bloodType = findViewById(R.id.address);
+        medicalConditions = findViewById(R.id.illnesses);
+        allergies = findViewById(R.id.past_surgeries);
+        medications = findViewById(R.id.currentmed);
 
-        Name = getIntent().getStringExtra("Name");
+        // Receive ID from intent
+       // int id = getIntent().getIntExtra("id", -1);
+        int id = 0;
 
-        fetchMedicalInfo();
+        if (id != -1) {
+            fetchMedicalInfo(id);
+        } else {
+            Toast.makeText(this, "Invalid entry ID", Toast.LENGTH_SHORT).show();
+        }
     }
 
-    private void fetchMedicalInfo() {
-        StringRequest request = new StringRequest(Request.Method.POST, endpoints.MedicalInfo,
+    private void fetchMedicalInfo(int id) {
+        StringRequest request = new StringRequest(Request.Method.POST, endpoints.MedicalInfo + "?action=get",
                 response -> {
                     try {
                         JSONObject obj = new JSONObject(response);
-                        fullname.setText(obj.getString("name"));
-                        dob.setText(obj.getString("dob"));
-                        bloodType.setText(obj.getString("bloodType"));
-                        medicalConditions.setText(obj.getString("medicalConditions"));
-                        allergies.setText(obj.getString("allergies"));
-                        medications.setText(obj.getString("medications"));
+                        if (obj.getBoolean("success")) {
+                            JSONObject data = obj.getJSONObject("data");
+                            fullname.setText(data.getString("name"));
+                            dob.setText(data.getString("dob"));
+                            bloodType.setText(data.getString("bloodType"));
+                            medicalConditions.setText(data.getString("medicalConditions"));
+                            allergies.setText(data.getString("allergies"));
+                            medications.setText(data.getString("medications"));
+                        } else {
+                            Toast.makeText(this, obj.getString("message"), Toast.LENGTH_SHORT).show();
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        Toast.makeText(this, "Error parsing response", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Error parsing details", Toast.LENGTH_SHORT).show();
                     }
                 },
-                error -> {
-                    Toast.makeText(this, "Error fetching details", Toast.LENGTH_SHORT).show();
-                }
+                error -> Toast.makeText(this, "Error fetching details", Toast.LENGTH_SHORT).show()
         ) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("Name", Name);
+                params.put("user_id", String.valueOf(id));
                 return params;
             }
         };

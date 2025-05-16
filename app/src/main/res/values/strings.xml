@@ -1,11 +1,10 @@
 <resources>
-    <string name="app_name">CampusCare</string>
 
 
     <string name="open">Open Drawer</string>
     <string name="close">Close Drawer</string>
 
-     <string name="app_name">Campus Care</string>
+     <string name="app_name">CampusCare</string>
         <string-array name="blood_types">
             <item>Select Blood Type</item>
             <item>A+</item>

@@ -1,4 +1,4 @@
-package com.example.campuscare;
+package com.example.CampusCare;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -8,8 +8,11 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import java.text.DateFormat;
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddMedicalInfornation extends AppCompatActivity {
 
@@ -44,22 +47,47 @@ public class AddMedicalInfornation extends AppCompatActivity {
                 return;
             }
 
-            String dateCreated = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
-
-            MedicalHistory history = new MedicalHistory(name, dob, bloodType, medicalConditions, allergies, medications, dateCreated);
-
-            Intent intent = new Intent(AddMedicalInfornation.this, MedicalInformation.class);
-            intent.putExtra("history", history);
-            startActivity(intent);
+            saveMedicalInfo(name, dob, bloodType, medicalConditions, allergies, medications);
         });
     }
 
     private void showDatePicker() {
         Calendar calendar = Calendar.getInstance();
-        DatePickerDialog dialog = new DatePickerDialog(this, (DatePicker view, int year, int month, int dayOfMonth) -> {
-            String dob = dayOfMonth + "/" + (month + 1) + "/" + year;
-            etDOB.setText(dob);
-        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        DatePickerDialog dialog = new DatePickerDialog(this,
+                (DatePicker view, int year, int month, int dayOfMonth) -> {
+                    String dob = dayOfMonth + "/" + (month + 1) + "/" + year;
+                    etDOB.setText(dob);
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH));
         dialog.show();
+    }
+
+    private void saveMedicalInfo(String name, String dob, String bloodType, String medicalConditions, String allergies, String medications) {
+        StringRequest request = new StringRequest(Request.Method.POST, endpoints.SaveMedicalInfo,
+                response -> {
+                    Toast.makeText(this, "Information saved successfully", Toast.LENGTH_SHORT).show();
+                    // Go back to list after saving
+                    Intent intent = new Intent(AddMedicalInfornation.this, MedicalInformation.class);
+                    startActivity(intent);
+                    finish();
+                },
+                error -> Toast.makeText(this, "Failed to save information", Toast.LENGTH_SHORT).show()
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("name", name);
+                params.put("dob", dob);
+                params.put("bloodType", bloodType);
+                params.put("medicalConditions", medicalConditions);
+                params.put("allergies", allergies);
+                params.put("medications", medications);
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(this).addToRequestQueue(request);
     }
 }

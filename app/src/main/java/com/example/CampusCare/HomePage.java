@@ -56,7 +56,7 @@ public class HomePage extends AppCompatActivity {
         });
 
         btnMyDocuments.setOnClickListener(v -> {
-            Intent intent = new Intent(HomePage.this, MedicalInfo.class);
+            Intent intent = new Intent(HomePage.this, MedicalInformation.class);
             startActivity(intent);
         });
 

@@ -1,5 +1,7 @@
-package com.example.campuscare;
+package com.example.CampusCare;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +18,11 @@ public class MedicalHistoryAdapter extends RecyclerView.Adapter<MedicalHistoryAd
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvDate, tvDetails;
+        TextView tvDate;
 
         public ViewHolder(View view) {
             super(view);
             tvDate = view.findViewById(R.id.tvDate);
-            tvDetails = view.findViewById(R.id.tvDetails);
         }
     }
 
@@ -37,18 +38,12 @@ public class MedicalHistoryAdapter extends RecyclerView.Adapter<MedicalHistoryAd
 
         holder.tvDate.setText(history.getDateCreated());
 
-        String fullDetails = "Name: " + history.getName() + "\nDOB: " + history.getDob()
-                + "\nBlood Type: " + history.getBloodType()
-                + "\nMedical Conditions: " + history.getMedicalConditions()
-                + "\nAllergies: " + history.getAllergies()
-                + "\nMedications: " + history.getMedications();
-
-        holder.tvDetails.setText(fullDetails);
-        holder.tvDetails.setVisibility(history.isExpanded() ? View.VISIBLE : View.GONE);
-
-        holder.tvDate.setOnClickListener(v -> {
-            history.setExpanded(!history.isExpanded());
-            notifyItemChanged(position);
+        holder.itemView.setOnClickListener(v -> {
+            Context context = v.getContext();
+            Intent intent = new Intent(context, ViewmedicalInfo.class);
+            intent.putExtra("dateCreated", history.getDateCreated());
+            intent.putExtra("name", history.getName());
+            context.startActivity(intent);
         });
     }
 
