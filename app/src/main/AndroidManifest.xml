@@ -41,6 +41,8 @@
         <activity android:name="com.example.CampusCare.HealthInfoPage" />
         <activity android:name="com.example.CampusCare.AddMedicalInfornation" />
         <activity android:name="com.example.CampusCare.ViewmedicalInfo" />
+        <activity android:name="com.example.CampusCare.MedicalInformation" />
+        <activity android:name="com.example.CampusCare.MedicalHistory" />
 
     </application>
 
