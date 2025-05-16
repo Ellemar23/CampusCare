@@ -1,31 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rvMedicalHistory"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <!-- ScrollView to make it scrollable if there are many dates -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:id="@+id/linearLayoutDates"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!-- Dates will be added here dynamically -->
-        </LinearLayout>
-
-    </ScrollView>
-
-    <!-- TextView for "No dates available" -->
-    <TextView
-        android:id="@+id/noDatesText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="No dates available"
-        android:visibility="gone" />
-
-</LinearLayout>
+    android:padding="8dp"/>
