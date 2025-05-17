@@ -1,5 +1,6 @@
 package com.example.CampusCare;
 
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -28,7 +29,7 @@ public class ViewmedicalInfo extends AppCompatActivity {
         fullname = findViewById(R.id.tvFullName);
         dob = findViewById(R.id.tvDOB);
         bloodType = findViewById(R.id.tvBloodType);
-        medicalConditions = findViewById(R.id.tvMedicalConditions);
+        medicalConditions =findViewById(R.id.tvMedicalConditions);
         allergies = findViewById(R.id.tvAllergies);
         medications = findViewById(R.id.tvMedications);
 
@@ -53,7 +54,7 @@ public class ViewmedicalInfo extends AppCompatActivity {
             return;
         }
 
-        StringRequest request = new StringRequest(Request.Method.POST, endpoints.MedicalInfo + "?action=get",
+        StringRequest request = new StringRequest(Request.Method.POST, endpoints.MedicalInfo,
                 response -> {
                     try {
                         JSONObject obj = new JSONObject(response);

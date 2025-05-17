@@ -1,4 +1,5 @@
 package com.example.CampusCare;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -10,9 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
-import com.example.CampusCare.MedicalHistory;
-import com.example.CampusCare.MedicalHistoryAdapter;
-import com.example.CampusCare.endpoints;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MedicalInformation extends AppCompatActivity {
+public class MedicalInformationList extends AppCompatActivity {
 
     Button AddMedicalInfo;
     RecyclerView recyclerView;
@@ -44,10 +42,9 @@ public class MedicalInformation extends AppCompatActivity {
 
         AddMedicalInfo = findViewById(R.id.AddMedicalInfo);
         AddMedicalInfo.setOnClickListener(v -> {
-            Intent intent = new Intent(MedicalInformation.this, AddMedicalInfornation.class);
+            Intent intent = new Intent(MedicalInformationList.this, AddMedicalInfornation.class);
             startActivity(intent);
         });
-
 
         fetchMedicalHistoryList();
     }
@@ -55,11 +52,8 @@ public class MedicalInformation extends AppCompatActivity {
     private void fetchMedicalHistoryList() {
         SharedPreferences prefs = getSharedPreferences("CampusCarePrefs", MODE_PRIVATE);
         String userId = prefs.getString("user_id", "-1");
-        if (!userId.equals("-1")) {
-            Toast.makeText(this, "User already logged in", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
+        // Only block access if not logged in
         if (userId.equals("-1")) {
             Toast.makeText(this, "User not logged in. Please login again.", Toast.LENGTH_SHORT).show();
             return;
