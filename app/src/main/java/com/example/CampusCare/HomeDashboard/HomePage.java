@@ -1,4 +1,4 @@
-package com.example.CampusCare;
+package com.example.CampusCare.HomeDashboard;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +10,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.CampusCare.Appointment.AppointmentList;
+import com.example.CampusCare.HealthInfoPage;
+import com.example.CampusCare.HistoryPage;
+import com.example.CampusCare.MessagesPage;
+import com.example.CampusCare.Notification;
+import com.example.CampusCare.ProfilePage;
+import com.example.CampusCare.R;
+import com.example.CampusCare.MedicalInformation.MedicalInformationList;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomePage extends AppCompatActivity {
@@ -63,7 +71,7 @@ public class HomePage extends AppCompatActivity {
 
         // Main buttons click
         btnBookAppointment.setOnClickListener(v -> {
-            Intent intent = new Intent(HomePage.this, AppointmentPage.class);
+            Intent intent = new Intent(HomePage.this, AppointmentList.class);
             startActivity(intent);
         });
 

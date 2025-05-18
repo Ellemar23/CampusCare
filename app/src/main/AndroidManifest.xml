@@ -20,7 +20,7 @@
 
         <!-- Main Activity -->
         <activity
-            android:name="com.example.CampusCare.MainActivity"
+            android:name="com.example.CampusCare.HomeDashboard.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,18 +29,21 @@
         </activity>
 
         <!-- Other Activities -->
-        <activity android:name="com.example.CampusCare.AppointmentPage" />
-        <activity android:name="com.example.CampusCare.LogInPage" />
-        <activity android:name="com.example.CampusCare.HomePage" />
+        <activity android:name="com.example.CampusCare.Appointment.BookAppointmentPage" />
+        <activity android:name="com.example.CampusCare.HomeDashboard.LogInPage" />
+        <activity android:name="com.example.CampusCare.HomeDashboard.HomePage" />
         <activity android:name="com.example.CampusCare.SignUpPage" />
         <activity android:name="com.example.CampusCare.HistoryPage" />
         <activity android:name="com.example.CampusCare.ProfilePage" />
         <activity android:name="com.example.CampusCare.MessagesPage" />
         <activity android:name="com.example.CampusCare.Notification" />
         <activity android:name="com.example.CampusCare.HealthInfoPage" />
-        <activity android:name="com.example.CampusCare.AddMedicalInfornation" />
-        <activity android:name="com.example.CampusCare.ViewmedicalInfo" />
-        <activity android:name="com.example.CampusCare.MedicalInformationList" />
+        <activity android:name="com.example.CampusCare.MedicalInformation.AddMedicalInfornation" />
+        <activity android:name="com.example.CampusCare.MedicalInformation.ViewmedicalInfo" />
+        <activity android:name="com.example.CampusCare.MedicalInformation.MedicalInformationList" />
+        <activity android:name="com.example.CampusCare.Appointment.AppointmentList" />
+        <activity android:name="com.example.CampusCare.Appointment.ViewAppointment" />
+
 
 
     </application>

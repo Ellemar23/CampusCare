@@ -1,4 +1,4 @@
-package com.example.CampusCare;
+package com.example.CampusCare.MedicalInformation;
 
 
 import android.content.SharedPreferences;
@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.example.CampusCare.R;
+import com.example.CampusCare.VolleySingleton;
+import com.example.CampusCare.Endpoints.endpoints;
 
 import org.json.JSONException;
 import org.json.JSONObject;

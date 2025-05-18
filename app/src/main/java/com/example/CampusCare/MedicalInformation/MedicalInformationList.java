@@ -1,4 +1,4 @@
-package com.example.CampusCare;
+package com.example.CampusCare.MedicalInformation;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.example.CampusCare.R;
+import com.example.CampusCare.VolleySingleton;
+import com.example.CampusCare.Endpoints.endpoints;
 
 import org.json.JSONArray;
 import org.json.JSONException;

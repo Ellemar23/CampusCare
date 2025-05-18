@@ -1,4 +1,4 @@
-package com.example.CampusCare;
+package com.example.CampusCare.MedicalInformation;
 
 public class MedicalHistory {
     private String dateCreated;

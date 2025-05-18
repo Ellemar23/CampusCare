@@ -1,4 +1,4 @@
-package com.example.CampusCare;
+package com.example.CampusCare.MedicalInformation;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.CampusCare.R;
 
 import java.util.List;
 

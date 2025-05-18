@@ -1,4 +1,4 @@
-package com.example.CampusCare;
+package com.example.CampusCare.Appointment;
 
 public class AppointmentDetails {
     private String doctorName;
@@ -15,23 +15,9 @@ public class AppointmentDetails {
         this.reason = reason;
     }
 
-    public String getDoctorName() {
-        return doctorName;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public String getReason() {
-        return reason;
-    }
+    public String getDoctorName() { return doctorName; }
+    public String getDate() { return date; }
+    public String getTime() { return time; }
+    public String getType() { return type; }
+    public String getReason() { return reason; }
 }

@@ -2,6 +2,7 @@
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
@@ -10,214 +11,234 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-1dp">
 
         <!-- Title -->
         <TextView
             android:id="@+id/personal_info_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Personal Information"
+            android:paddingBottom="20dp"
+            android:text="Medical Information"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
             android:textColor="#212121"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:paddingBottom="20dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Full Name Label -->
+        <!-- Full Name -->
+
+        <!-- Birthdate -->
+
         <TextView
             android:id="@+id/tvFullName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Full Name:"
-            android:textColor="#757575"
-            android:textSize="16sp"
-            android:paddingBottom="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/personal_info_title" />
-
-        <!-- Full Name Value -->
-        <TextView
-            android:id="@+id/tvFullNameValue"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Juan Dela Cruz"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:text="Name:"
             android:textColor="#212121"
             android:textSize="16sp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@id/tvFullName"
-            app:layout_constraintTop_toTopOf="@id/tvFullName"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/tvFullNameValue"
+            app:layout_constraintTop_toBottomOf="@id/personal_info_title" />
 
-        <!-- Birthdate Label -->
+        <TextView
+            android:id="@+id/tvFullNameValue"
+            android:layout_width="52dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="24dp"
+            android:text="Name:"
+            android:textColor="#212121"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/personal_info_title"
+            app:layout_constraintTop_toBottomOf="@+id/personal_info_title" />
+
+        <!-- Blood Type -->
+
+        <!-- Medical Conditions Title -->
+
         <TextView
             android:id="@+id/tvDOB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Birthdate:"
-            android:textColor="#757575"
-            android:textSize="16sp"
-            android:paddingBottom="20dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvFullName" />
-
-        <!-- Birthdate Value -->
-        <TextView
-            android:id="@+id/tvDOBValue"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="January 1, 2006"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:text="Birthday:"
             android:textColor="#212121"
             android:textSize="16sp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@id/tvDOB"
-            app:layout_constraintTop_toTopOf="@id/tvDOB"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/tvDOBValue"
+            app:layout_constraintTop_toBottomOf="@+id/tvFullName" />
 
-        <!-- Blood Type Label -->
+        <TextView
+            android:id="@+id/tvDOBValue"
+            android:layout_width="103dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="28dp"
+            android:text="Birth of Date:"
+            android:textColor="#212121"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvFullNameValue" />
+
         <TextView
             android:id="@+id/tvBloodType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="28dp"
             android:text="Blood Type:"
-            android:textColor="#757575"
-            android:textSize="16sp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvDOB" />
-
-        <!-- Blood Type Value -->
-        <TextView
-            android:id="@+id/tvBloodTypeValue"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="O+"
             android:textColor="#212121"
             android:textSize="16sp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@id/tvBloodType"
-            app:layout_constraintTop_toTopOf="@id/tvBloodType"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/tvBloodTypeValue"
+            app:layout_constraintTop_toBottomOf="@id/tvDOB" />
 
-        <!-- Medical Conditions Title -->
+        <TextView
+            android:id="@+id/tvBloodTypeValue"
+            android:layout_width="91dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="24dp"
+            android:text="Blood Type:"
+            android:textColor="#212121"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDOBValue" />
+
+        <!-- Medical Conditions -->
+
         <TextView
             android:id="@+id/medical_history_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:paddingBottom="20dp"
             android:text="Medical Conditions"
             android:textColor="#212121"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginTop="24dp"
-            android:paddingBottom="20dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvBloodType" />
 
-        <!-- Medical Conditions Label -->
         <TextView
             android:id="@+id/tvMedicalConditions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="Medical Conditions:"
-            android:textColor="#757575"
+            android:textColor="#212121"
             android:textSize="16sp"
-            android:paddingBottom="20dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvMedicalConditionsValue"
             app:layout_constraintTop_toBottomOf="@id/medical_history_title" />
 
-        <!-- Medical Conditions Value -->
-        <TextView
-            android:id="@+id/tvMedicalConditionsValue"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Asthma"
-            android:textColor="#212121"
-            android:textSize="16sp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@id/tvMedicalConditions"
-            app:layout_constraintTop_toTopOf="@id/tvMedicalConditions"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <!-- Allergies Label -->
-        <TextView
-            android:id="@+id/tvAllergies"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Allergies:"
-            android:textColor="#757575"
-            android:textSize="16sp"
-            android:paddingBottom="20dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvMedicalConditions" />
-
-        <!-- Allergies Value -->
-        <TextView
-            android:id="@+id/tvAllergiesValue"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Peanuts"
-            android:textColor="#212121"
-            android:textSize="16sp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@id/tvAllergies"
-            app:layout_constraintTop_toTopOf="@id/tvAllergies"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <!-- Medications Label -->
-        <TextView
-            android:id="@+id/tvMedications"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Medications:"
-            android:textColor="#757575"
-            android:textSize="16sp"
-            android:paddingBottom="20dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvAllergies" />
-
-        <!-- Medications Value -->
-        <TextView
-            android:id="@+id/tvMedicationsValue"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Ventolin"
-            android:textColor="#212121"
-            android:textSize="16sp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@id/tvMedications"
-            app:layout_constraintTop_toTopOf="@id/tvMedications"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <!-- Date Label -->
         <TextView
             android:id="@+id/dateLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="80dp"
             android:text="Date Uploaded:"
-            android:textColor="#757575"
+            android:textColor="#212121"
             android:textSize="14sp"
-            android:layout_marginTop="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvMedications" />
 
-        <!-- Date Value -->
+        <TextView
+            android:id="@+id/tvMedicationsValue"
+            android:layout_width="91dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="24dp"
+            android:text="Medication:"
+            android:textColor="#212121"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.004"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvAllergiesValue" />
+
+        <TextView
+            android:id="@+id/tvMedications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:text="Medications:"
+            android:textColor="#212121"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/tvMedicationsValue"
+            app:layout_constraintTop_toBottomOf="@id/tvAllergies" />
+
+        <TextView
+            android:id="@+id/tvAllergiesValue"
+            android:layout_width="73dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            android:text="Allergies:"
+            android:textColor="#212121"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvMedicalConditionsValue" />
+
+        <!-- Allergies -->
+
+        <TextView
+            android:id="@+id/tvAllergies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Allergies:"
+            android:textColor="#212121"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.037"
+            app:layout_constraintStart_toEndOf="@+id/tvAllergiesValue"
+            app:layout_constraintTop_toBottomOf="@id/tvMedicalConditions" />
+
         <TextView
             android:id="@+id/dateText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="May 17, 2025"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="60dp"
+            android:text="Date Uploaded:"
             android:textColor="#212121"
             android:textSize="14sp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@id/dateLabel"
-            app:layout_constraintTop_toTopOf="@id/dateLabel"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvMedicationsValue" />
+
+        <TextView
+            android:id="@+id/tvMedicalConditionsValue"
+            android:layout_width="139dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="240dp"
+            android:text="Medical Condition:"
+            android:textColor="#212121"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/medical_history_title" />
+
+        <!-- Medications -->
+
+        <!-- Date -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

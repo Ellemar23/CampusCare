@@ -1,4 +1,5 @@
-package com.example.CampusCare;
+package com.example.CampusCare.HomeDashboard;
+
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.example.CampusCare.R;
+import com.example.CampusCare.SignUpPage;
+import com.example.CampusCare.VolleySingleton;
+import com.example.CampusCare.Endpoints.endpoints;
+
 
 import java.util.HashMap;
 import java.util.Map;

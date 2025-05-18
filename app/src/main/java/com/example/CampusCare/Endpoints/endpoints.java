@@ -1,18 +1,16 @@
-package com.example.CampusCare;
+package com.example.CampusCare.Endpoints;
 
 public class endpoints {
-    private static final String BASE_URL = "http://192.168.100.191/FinalProject/"; // Replace with your WAMP IP & folder
+    private static final String BASE_URL = "http://192.168.0.105/FinalProject/"; // Replace with your WAMP IP & folder
 
 
     public static final String LOGIN = BASE_URL + "login.php";
     public static final String SIGNUP = BASE_URL + "signup.php";
     public static final String ForgotPassword = BASE_URL + "forgotPassword.php";
     public static final String ResetPassword = BASE_URL + "resetPassword.php";
-    public static final String BookAppointment = BASE_URL + "bookAppointment.php";
-    public static final String GetAppointmentList = BASE_URL + "appointment.php?action=list";
-    public static final String AppointmentDetails = BASE_URL + "appointment.php?action=get";
-    public static final String DeleteAppointment = BASE_URL + "appointment.php?action=delete";
-    public static final String UpdateAppointment = BASE_URL + "appointment.php?action=update";
+    public static final String AddAppointment = BASE_URL + "appointments.php?action=add";
+    public static final String ListAppointments = BASE_URL + "appointments.php?action=list";
+    public static final String GetAppointment = BASE_URL + "appointments.php?action=get";
     public static final String SaveMedicalInformation = BASE_URL + "medicalInfo.php?action=add";
     public static final String GetMedicalHistoryList = BASE_URL + "medicalInfo.php?action=list";
     public static final String MedicalInfo = BASE_URL + "medicalInfo.php?action=get";
