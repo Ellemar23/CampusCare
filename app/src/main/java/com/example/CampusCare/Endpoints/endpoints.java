@@ -11,6 +11,10 @@ public class endpoints {
     public static final String AddAppointment = BASE_URL + "appointments.php?action=add";
     public static final String ListAppointments = BASE_URL + "appointments.php?action=list";
     public static final String GetAppointment = BASE_URL + "appointments.php?action=get";
+    public static final String GetAppointmentId = BASE_URL + "appointments.php?action=get_id";
+    public static final String DeleteAppointment = BASE_URL + "appointments.php?action=delete";
+    public static final String UpdateAppointment = BASE_URL + "appointments.php?action=update";
+
     public static final String SaveMedicalInformation = BASE_URL + "medicalInfo.php?action=add";
     public static final String GetMedicalHistoryList = BASE_URL + "medicalInfo.php?action=list";
     public static final String MedicalInfo = BASE_URL + "medicalInfo.php?action=get";

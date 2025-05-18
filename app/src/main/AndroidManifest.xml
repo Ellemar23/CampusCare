@@ -43,6 +43,7 @@
         <activity android:name="com.example.CampusCare.MedicalInformation.MedicalInformationList" />
         <activity android:name="com.example.CampusCare.Appointment.AppointmentList" />
         <activity android:name="com.example.CampusCare.Appointment.ViewAppointment" />
+        <activity android:name="com.example.CampusCare.Appointment.UpdateAppointment" />
 
 
 

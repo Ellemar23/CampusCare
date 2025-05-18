@@ -3,6 +3,8 @@ package com.example.CampusCare.MedicalInformation;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +24,8 @@ import java.util.Map;
 
 public class ViewmedicalInfo extends AppCompatActivity {
 
-    TextView fullname, dob, bloodType, medicalConditions, allergies, medications;
+    TextView dateD , fullname, dob, bloodType, medicalConditions, allergies, medications;
+    Button Delete, Update;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,10 @@ public class ViewmedicalInfo extends AppCompatActivity {
         medicalConditions =findViewById(R.id.tvMedicalConditions);
         allergies = findViewById(R.id.tvAllergies);
         medications = findViewById(R.id.tvMedications);
+        dateD = findViewById(R.id.tvDate);
+        //Delete = findViewById(R.id.delete);
+        //pdate = findViewById(R.id.update);
+
 
         SharedPreferences prefs = getSharedPreferences("CampusCarePrefs", MODE_PRIVATE);
         String userIdStr = prefs.getString("user_id", "-1");
@@ -48,6 +55,7 @@ public class ViewmedicalInfo extends AppCompatActivity {
         int userId = Integer.parseInt(userIdStr);
         fetchMedicalInfo(userId);
     }
+
 
     private void fetchMedicalInfo(int userId) {
         String date = getIntent().getStringExtra("dateCreated");
@@ -69,6 +77,8 @@ public class ViewmedicalInfo extends AppCompatActivity {
                             medicalConditions.setText(data.getString("medicalConditions"));
                             allergies.setText(data.getString("allergies"));
                             medications.setText(data.getString("medications"));
+                            dateD.setText(data.getString("date"));
+
                         } else {
                             Toast.makeText(this, "Data not found for this record.", Toast.LENGTH_SHORT).show();
                         }
@@ -90,4 +100,5 @@ public class ViewmedicalInfo extends AppCompatActivity {
 
         VolleySingleton.getInstance(this).addToRequestQueue(request);
     }
+
 }
