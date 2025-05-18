@@ -37,19 +37,18 @@ public class ViewAppointment extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("CampusCarePrefs", MODE_PRIVATE);
         userId = Integer.parseInt(prefs.getString("user_id", "-1"));
 
-        if (userId == -1) {
-            Toast.makeText(this, "User not logged in.", Toast.LENGTH_SHORT).show();
+        String selectedDate = getIntent().getStringExtra("date");
+
+        if (userId == -1 || selectedDate == null) {
+            Toast.makeText(this, "Missing user ID or date.", Toast.LENGTH_SHORT).show();
             finish();
             return;
-        }else{
-            Toast.makeText(this, "User ID: " + userId, Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, "User logged in.", Toast.LENGTH_SHORT).show();
         }
 
-        fetchLatestAppointment();
+        fetchAppointmentByDate(selectedDate);
     }
 
-    private void fetchLatestAppointment() {
+    private void fetchAppointmentByDate(String date) {
         StringRequest request = new StringRequest(Request.Method.POST, endpoints.GetAppointment,
                 response -> {
                     try {
@@ -73,8 +72,9 @@ public class ViewAppointment extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("action", "get"); // This tells PHP to run the "get" case
-                params.put("user_id", String.valueOf(userId)); // User ID of logged-in user
+                params.put("action", "get");
+                params.put("user_id", String.valueOf(userId));
+                params.put("date", date);
                 return params;
             }
         };
