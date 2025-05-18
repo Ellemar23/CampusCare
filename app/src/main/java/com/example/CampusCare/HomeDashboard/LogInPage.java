@@ -1,4 +1,5 @@
-package com.example.CampusCare;
+package com.example.CampusCare.HomeDashboard;
+
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.example.CampusCare.R;
+import com.example.CampusCare.SignUpPage;
+import com.example.CampusCare.VolleySingleton;
+import com.example.CampusCare.Endpoints.endpoints;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,9 +59,6 @@ public class LogInPage extends AppCompatActivity {
             if (passStr.isEmpty()) {
                 password.setError("Please enter your password");
                 return;
-            } else if (passStr.length() < 8) {
-                password.setError("Password must be at least 8 characters");
-                return;
             }
 
             if (emailStr.equals("admin@gmail.com") && passStr.equals("admin1234")) {
@@ -72,11 +75,26 @@ public class LogInPage extends AppCompatActivity {
     private void loginUser(String emailStr, String passStr) {
         StringRequest request = new StringRequest(Request.Method.POST, endpoints.LOGIN,
                 response -> {
-                    if (response.equals("success")) {
+                    if (response.startsWith("success:")) {
+                        String[] parts = response.split(":");
+                        String userId = parts[1]; // Specific user ID from server
+                        String userName = parts[2]; // User name from server
+
+                        // Save user ID in SharedPreferences for later use
+                        getSharedPreferences("CampusCarePrefs", MODE_PRIVATE)
+                                .edit()
+                                .putString("user_id", userId)
+                                .putString("user_name", userName)
+                                .apply();
+
                         Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(LogInPage.this, HomePage.class));
-                    } else {
+                    } else if (response.equals("invalid_credentials")) {
                         Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show();
+                    } else if (response.equals("missing_parameters")) {
+                        Toast.makeText(this, "Missing parameters", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Unexpected response: " + response, Toast.LENGTH_SHORT).show();
                     }
                 },
                 error -> Toast.makeText(this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show()
@@ -85,7 +103,7 @@ public class LogInPage extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> map = new HashMap<>();
                 map.put("email", emailStr);
-                map.put("Password", passStr);
+                map.put("password", passStr);
                 return map;
             }
         };

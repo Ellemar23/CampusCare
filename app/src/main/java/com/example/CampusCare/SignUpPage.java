@@ -1,6 +1,7 @@
 package com.example.CampusCare;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,9 +10,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.CampusCare.Endpoints.endpoints;
+import com.example.CampusCare.HomeDashboard.LogInPage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +27,6 @@ public class SignUpPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
 
-        // Connect EditTexts
         email = findViewById(R.id.email);
         password = findViewById(R.id.Password);
         confirmPassword = findViewById(R.id.ConfirmPassword);
@@ -37,38 +37,51 @@ public class SignUpPage extends AppCompatActivity {
         SignUp = findViewById(R.id.SignUp);
 
         SignUp.setOnClickListener(v -> {
-            String Email = email.getText().toString();
-            String Password = password.getText().toString();
-            String ConfirmPassword= confirmPassword.getText().toString();
-            String Name = name.getText().toString();
-            String Age = age.getText().toString();
-            String Gender = gender.getText().toString();
-            String Contact = contact.getText().toString();
-            SignUp(Email, Password, ConfirmPassword, Name, Age, Gender, Contact);
+            String Email = email.getText().toString().trim();
+            String Password = password.getText().toString().trim();
+            String ConfirmPassword = confirmPassword.getText().toString().trim();
+            String Name = name.getText().toString().trim();
+            String Age = age.getText().toString().trim();
+            String Gender = gender.getText().toString().trim();
+            String Contact = contact.getText().toString().trim();
 
+            signUp(Email, Password, ConfirmPassword, Name, Age, Gender, Contact);
         });
     }
 
-    private void SignUp(String Email, String Password, String ConfirmPassword, String Name, String Age, String Gender, String Contact) {
+    private void signUp(String Email, String Password, String ConfirmPassword, String Name, String Age, String Gender, String Contact) {
         StringRequest request = new StringRequest(Request.Method.POST, endpoints.SIGNUP,
                 response -> {
-                    Toast.makeText(this, "Sign Up successfully : " + response, Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(SignUpPage.this, LogInPage.class);
-                    intent.putExtra("Name", Name);
-                    startActivity(intent);
+                    if (response.equals("success")) {
+                        SharedPreferences prefs = getSharedPreferences("CampusCarePrefs", MODE_PRIVATE);
+                        String userName = prefs.getString("user_name", "User");
+                        Toast.makeText(this, "Sign Up successful! Welcome " + userName, Toast.LENGTH_LONG).show();
+
+                        Intent intent = new Intent(SignUpPage.this, LogInPage.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        // Show server message (like "Email already exists", or errors)
+                        Toast.makeText(this, response, Toast.LENGTH_LONG).show();
+                    }
                 },
-                error -> Toast.makeText(this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show()) {
+                error -> Toast.makeText(this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show()
+        ) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> map = new HashMap<>();
-                map.put("Email", Email);
-                map.put("Password", Password);
-                map.put("ConfirmPassword", ConfirmPassword);
-                map.put("Name", Name);
-                map.put("Age", Age);
+                // keys must match PHP keys (lowercase)
+                map.put("name", Name);
+                map.put("gender", Gender);
+                map.put("age", Age);
+                map.put("contact", Contact);
+                map.put("email", Email);
+                map.put("password", Password);
+                map.put("confirmPassword", ConfirmPassword);
                 return map;
             }
         };
+
         VolleySingleton.getInstance(this).addToRequestQueue(request);
     }
 }

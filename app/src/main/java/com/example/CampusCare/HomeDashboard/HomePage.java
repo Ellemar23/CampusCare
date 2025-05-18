@@ -1,6 +1,7 @@
-package com.example.CampusCare;
+package com.example.CampusCare.HomeDashboard;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -9,13 +10,21 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.CampusCare.Appointment.AppointmentList;
+import com.example.CampusCare.HealthInfoPage;
+import com.example.CampusCare.HistoryPage;
+import com.example.CampusCare.MessagesPage;
+import com.example.CampusCare.Notification;
+import com.example.CampusCare.ProfilePage;
+import com.example.CampusCare.R;
+import com.example.CampusCare.MedicalInformation.MedicalInformationList;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomePage extends AppCompatActivity {
 
     private ImageButton manIcon, notificationIcon;
     private Button btnBookAppointment, btnMyDocuments, btnMessages, btnHealthInfo;
-    private TextView welcomeText, appointmentInfo, documentTitle, documentUploadInfo;
+    private TextView welcomeText, appointmentInfo, documentTitle, documentUploadInfo ,name;
     private BottomNavigationView bottomNavigationView; // Bottom nav
 
     @Override
@@ -33,11 +42,22 @@ public class HomePage extends AppCompatActivity {
         btnHealthInfo = findViewById(R.id.btn_health_info);
 
         welcomeText = findViewById(R.id.welcome_text);
+        name = findViewById(R.id.name);
         appointmentInfo = findViewById(R.id.appointment_info);
         documentTitle = findViewById(R.id.document_title);
         documentUploadInfo = findViewById(R.id.document_upload_info);
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        // Load user name from SharedPreferences and set to welcome text
+        SharedPreferences prefs = getSharedPreferences("CampusCarePrefs", MODE_PRIVATE);
+        String userName = prefs.getString("user_name", "User");
+        String UserId = prefs.getString("user_id", "User");
+        welcomeText.setText("Welcome " + UserId);
+
+
+        name.setText(userName);
+
 
         // Top icon click
         manIcon.setOnClickListener(v -> {
@@ -51,12 +71,12 @@ public class HomePage extends AppCompatActivity {
 
         // Main buttons click
         btnBookAppointment.setOnClickListener(v -> {
-            Intent intent = new Intent(HomePage.this, AppointmentPage.class);
+            Intent intent = new Intent(HomePage.this, AppointmentList.class);
             startActivity(intent);
         });
 
         btnMyDocuments.setOnClickListener(v -> {
-            Intent intent = new Intent(HomePage.this, MedicalInfo.class);
+            Intent intent = new Intent(HomePage.this, MedicalInformationList.class);
             startActivity(intent);
         });
 
@@ -81,14 +101,12 @@ public class HomePage extends AppCompatActivity {
 
             } else if (id == R.id.nav_history) {
                 Toast.makeText(HomePage.this, "History selected", Toast.LENGTH_SHORT).show();
-                // Navigate to HistoryPage
                 Intent intent = new Intent(HomePage.this, HistoryPage.class);
                 startActivity(intent);
                 return true;
 
             } else if (id == R.id.nav_messages) {
                 Toast.makeText(HomePage.this, "Messages selected", Toast.LENGTH_SHORT).show();
-                // Navigate to MessagesPage
                 Intent intent = new Intent(HomePage.this, MessagesPage.class);
                 startActivity(intent);
                 return true;
