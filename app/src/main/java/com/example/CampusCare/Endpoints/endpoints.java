@@ -1,7 +1,7 @@
 package com.example.CampusCare.Endpoints;
 
 public class endpoints {
-    private static final String BASE_URL = "http://192.168.0.105/FinalProject/"; // Replace with your WAMP IP & folder
+    private static final String BASE_URL = "http://192.168.45.179/FinalProject/"; // Replace with your WAMP IP & folder
 
 
     public static final String LOGIN = BASE_URL + "login.php";
@@ -18,6 +18,7 @@ public class endpoints {
     public static final String SaveMedicalInformation = BASE_URL + "medicalInfo.php?action=add";
     public static final String GetMedicalHistoryList = BASE_URL + "medicalInfo.php?action=list";
     public static final String MedicalInfo = BASE_URL + "medicalInfo.php?action=get";
+    public static final String GetMedicalInfoId = BASE_URL + "medicalInfo.php?action=get_id";
     public static final String DeleteMedicalInfo = BASE_URL + "medicalInfo.php?action=delete";
     public static final String UpdateMedicalInfo = BASE_URL + "medicalInfo.php?action=update";
 

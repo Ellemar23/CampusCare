@@ -69,6 +69,8 @@ public class LogInPage extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show();
             }
+            Intent intent = new Intent(LogInPage.this, HomePage.class);
+            startActivity(intent);
         });
     }
 

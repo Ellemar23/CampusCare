@@ -46,7 +46,6 @@
         <activity android:name="com.example.CampusCare.Appointment.UpdateAppointment" />
 
 
-
     </application>
 
 </manifest>

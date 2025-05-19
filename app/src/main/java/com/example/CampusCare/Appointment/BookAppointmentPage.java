@@ -40,7 +40,7 @@ public class BookAppointmentPage extends AppCompatActivity {
         confirmButton = findViewById(R.id.confirmButton);
 
         // Sample data
-        String[] doctors = {"Dr. Smith", "Dr. Ramirez", "Dr. Tan"};
+        String[] doctors = {"Dr. Pretz Elle", "Dr. Ramirez", "Dr. Tan"};
         String[] times = {"9:00 AM", "10:30 AM", "1:00 PM", "3:00 PM"};
 
         doctorSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, doctors));

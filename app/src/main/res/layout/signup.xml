@@ -2,12 +2,23 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/bg_gradient">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign Up"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center" />
 
         <!-- Name -->
         <EditText
@@ -15,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Name"
+            android:textColorHint="@color/black"
             android:inputType="textPersonName"
             android:layout_marginBottom="12dp" />
 
@@ -24,6 +36,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Gender"
+            android:textColorHint="@color/black"
+
             android:inputType="text"
             android:layout_marginBottom="12dp" />
 
@@ -33,6 +47,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Age"
+            android:textColorHint="@color/black"
+
             android:inputType="number"
             android:layout_marginBottom="12dp" />
 
@@ -42,6 +58,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Contact Number"
+            android:textColorHint="@color/black"
+
             android:inputType="phone"
             android:layout_marginBottom="12dp" />
 
@@ -51,6 +69,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
+            android:textColorHint="@color/black"
+
             android:inputType="textEmailAddress"
             android:layout_marginBottom="12dp" />
 
@@ -60,6 +80,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
+            android:textColorHint="@color/black"
+
             android:inputType="textPassword"
             android:layout_marginBottom="12dp" />
 
@@ -70,6 +92,8 @@
             android:layout_height="wrap_content"
             android:hint="Confirm Password"
             android:inputType="textPassword"
+            android:textColorHint="@color/black"
+
             android:layout_marginBottom="20dp" />
 
         <!-- Sign Up Button -->
@@ -78,7 +102,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sign Up"
-            android:backgroundTint="#3F51B5"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/black"
             android:textColor="#FFFFFF"
             android:padding="12dp" />
 

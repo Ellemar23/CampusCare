@@ -118,7 +118,6 @@ public class AppointmentList extends AppCompatActivity {
                 return params;
             }
         };
-
         VolleySingleton.getInstance(this).addToRequestQueue(request);
     }
 }

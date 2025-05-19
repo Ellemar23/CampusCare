@@ -34,7 +34,6 @@ public class HomePage extends AppCompatActivity {
 
         // Initialize views
         manIcon = findViewById(R.id.man_Icon);
-        notificationIcon = findViewById(R.id.notification_icon);
 
         btnBookAppointment = findViewById(R.id.btn_book_appointment);
         btnMyDocuments = findViewById(R.id.btn_my_documents);
@@ -53,7 +52,8 @@ public class HomePage extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("CampusCarePrefs", MODE_PRIVATE);
         String userName = prefs.getString("user_name", "User");
         String UserId = prefs.getString("user_id", "User");
-        welcomeText.setText("Welcome " + UserId);
+        welcomeText.setText("Welcome To CampusCare,");
+
 
 
         name.setText(userName);
@@ -64,10 +64,6 @@ public class HomePage extends AppCompatActivity {
             Toast.makeText(HomePage.this, "Profile icon clicked", Toast.LENGTH_SHORT).show();
         });
 
-        notificationIcon.setOnClickListener(v -> {
-            Intent intent = new Intent(HomePage.this, Notification.class);
-            startActivity(intent);
-        });
 
         // Main buttons click
         btnBookAppointment.setOnClickListener(v -> {

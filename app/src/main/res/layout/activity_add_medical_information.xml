@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient">
 
     <LinearLayout
         android:orientation="vertical"
@@ -15,6 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="50dp"
+            android:textColor="@android:color/black"
             android:gravity="center"
             android:text="Add Medical Information"
             android:textSize="24sp" />
@@ -65,8 +67,10 @@
             android:id="@+id/btnSaveMedicalInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/black"
             android:text="Save Medical History" />
     </LinearLayout>
 </ScrollView>
