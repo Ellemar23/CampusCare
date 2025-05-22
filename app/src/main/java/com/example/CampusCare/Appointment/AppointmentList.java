@@ -46,6 +46,15 @@ public class AppointmentList extends AppCompatActivity {
             // Handle click event here
             Toast.makeText(this, "Clicked appointment: " + appointment.getDate() + " " + appointment.getTime(), Toast.LENGTH_SHORT).show();
 
+            SharedPreferences ApointmentPrefs = getSharedPreferences("CampusCarePrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = ApointmentPrefs.edit();
+            editor.putString("appointment_date", appointment.getDate());
+            editor.putString("appointment_time", appointment.getTime());
+            editor.putString("appointment_doctor", appointment.getDoctorName());
+            editor.apply();
+
+
+
             // Example: Open a detail screen
             Intent intent = new Intent(AppointmentList.this, ViewAppointment.class);
             intent.putExtra("date", appointment.getDate());
@@ -53,6 +62,8 @@ public class AppointmentList extends AppCompatActivity {
             intent.putExtra("doctorName", appointment.getDoctorName());
             // Add other details as needed
             startActivity(intent);
+
+
         });
 
         recyclerView.setAdapter(adapter);
@@ -62,8 +73,12 @@ public class AppointmentList extends AppCompatActivity {
             Intent intent = new Intent(AppointmentList.this, BookAppointmentPage.class);
             startActivity(intent);
         });
+    }
 
-        fetchAppointmentList();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fetchAppointmentList(); // Auto-refresh appointments whenever this activity is visible
     }
 
     private void fetchAppointmentList() {
@@ -98,7 +113,7 @@ public class AppointmentList extends AppCompatActivity {
 
                             Log.d("AppointmentList", "DoctorName: " + doctorName);
 
-                            AppointmentDetails details = new AppointmentDetails(doctorName, date, time,"", "");
+                            AppointmentDetails details = new AppointmentDetails(doctorName, date, time, "", "");
                             appointmentList.add(details);
                         }
 

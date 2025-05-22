@@ -1,6 +1,7 @@
 package com.example.CampusCare.Appointment;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -29,11 +30,16 @@ public class UpdateAppointment extends AppCompatActivity {
     private int appointmentId = -1;
 
     private String doctorName, originalDate, time, type, reason;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_appointment);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("updating in...");
+        progressDialog.setCancelable(false);
 
         doctorSpinner = findViewById(R.id.doctorSpinner);
         timeSpinner = findViewById(R.id.timeSpinner);
@@ -154,11 +160,13 @@ public class UpdateAppointment extends AppCompatActivity {
     }
 
     private void updateAppointmentInDatabase(int appointmentId, String doctorName, String newDate, String time, String type, String reason) {
+        progressDialog.show();
         StringRequest request = new StringRequest(Request.Method.POST, endpoints.UpdateAppointment,
                 response -> {
                     try {
                         JSONObject obj = new JSONObject(response);
                         Toast.makeText(this, obj.getString("message"), Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
                         if (obj.getBoolean("success")) {
                             startActivity(new Intent(UpdateAppointment.this, AppointmentList.class));
                             finish();

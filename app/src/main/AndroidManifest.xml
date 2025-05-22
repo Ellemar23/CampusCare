@@ -32,9 +32,9 @@
         <activity android:name="com.example.CampusCare.Appointment.BookAppointmentPage" />
         <activity android:name="com.example.CampusCare.HomeDashboard.LogInPage" />
         <activity android:name="com.example.CampusCare.HomeDashboard.HomePage" />
-        <activity android:name="com.example.CampusCare.SignUpPage" />
-        <activity android:name="com.example.CampusCare.HistoryPage" />
-        <activity android:name="com.example.CampusCare.ProfilePage" />
+        <activity android:name="com.example.CampusCare.HomeDashboard.SignUpPage" />
+        <activity android:name="com.example.CampusCare.History.HistoryPage" />
+        <activity android:name="com.example.CampusCare.HomeDashboard.ProfilePage" />
         <activity android:name="com.example.CampusCare.MessagesPage" />
         <activity android:name="com.example.CampusCare.Notification" />
         <activity android:name="com.example.CampusCare.HealthInfoPage" />
@@ -44,6 +44,9 @@
         <activity android:name="com.example.CampusCare.Appointment.AppointmentList" />
         <activity android:name="com.example.CampusCare.Appointment.ViewAppointment" />
         <activity android:name="com.example.CampusCare.Appointment.UpdateAppointment" />
+        <activity android:name="com.example.CampusCare.HomeDashboard.OtpVerificationPage" />
+        <activity android:name="com.example.CampusCare.MedicalInformation.UpdateMedical" />
+
 
 
     </application>

@@ -1,6 +1,7 @@
 package com.example.CampusCare.Appointment;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -111,6 +112,8 @@ public class BookAppointmentPage extends AppCompatActivity {
 
                         if (success) {
                             clearFields();
+                            Intent intent = new Intent(BookAppointmentPage.this, AppointmentList.class);
+                            startActivity(intent);
                         }
                     } catch (Exception e) {
                         Toast.makeText(this, "Invalid server response", Toast.LENGTH_SHORT).show();

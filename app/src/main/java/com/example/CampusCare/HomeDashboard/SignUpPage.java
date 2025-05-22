@@ -1,10 +1,12 @@
-package com.example.CampusCare;
+package com.example.CampusCare.HomeDashboard;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.example.CampusCare.Endpoints.endpoints;
-import com.example.CampusCare.HomeDashboard.LogInPage;
+import com.example.CampusCare.R;
+import com.example.CampusCare.VolleySingleton;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +23,8 @@ import java.util.Map;
 public class SignUpPage extends AppCompatActivity {
 
     Button SignUp;
-    EditText email, password, confirmPassword, name, age, gender, contact;
+    EditText email, password, confirmPassword, name, age, contact;
+    RadioGroup genderGroup, roleGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +34,10 @@ public class SignUpPage extends AppCompatActivity {
         email = findViewById(R.id.email);
         password = findViewById(R.id.Password);
         confirmPassword = findViewById(R.id.ConfirmPassword);
+        genderGroup = findViewById(R.id.GenderTypeGroup);
+        roleGroup = findViewById(R.id.RoleTypeGroup);
         name = findViewById(R.id.Name);
         age = findViewById(R.id.Age);
-        gender = findViewById(R.id.Gender);
         contact = findViewById(R.id.Contact);
         SignUp = findViewById(R.id.SignUp);
 
@@ -42,26 +47,40 @@ public class SignUpPage extends AppCompatActivity {
             String ConfirmPassword = confirmPassword.getText().toString().trim();
             String Name = name.getText().toString().trim();
             String Age = age.getText().toString().trim();
-            String Gender = gender.getText().toString().trim();
             String Contact = contact.getText().toString().trim();
 
-            signUp(Email, Password, ConfirmPassword, Name, Age, Gender, Contact);
+            // Get selected gender RadioButton text
+            int selectedGenderId = genderGroup.getCheckedRadioButtonId();
+            if (selectedGenderId == -1) {
+                Toast.makeText(this, "Please select gender", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            RadioButton selectedGenderBtn = findViewById(selectedGenderId);
+            String Gender = selectedGenderBtn.getText().toString();
+
+            // Get selected role RadioButton text
+            int selectedRoleId = roleGroup.getCheckedRadioButtonId();
+            if (selectedRoleId == -1) {
+                Toast.makeText(this, "Please select role", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            RadioButton selectedRoleBtn = findViewById(selectedRoleId);
+            String Role = selectedRoleBtn.getText().toString();
+
+            signUp(Email, Password, ConfirmPassword, Name, Age, Gender, Contact, Role);
         });
     }
 
-    private void signUp(String Email, String Password, String ConfirmPassword, String Name, String Age, String Gender, String Contact) {
+    private void signUp(String Email, String Password, String ConfirmPassword, String Name, String Age, String Gender, String Contact, String Role) {
         StringRequest request = new StringRequest(Request.Method.POST, endpoints.SIGNUP,
                 response -> {
                     if (response.equals("success")) {
-                        SharedPreferences prefs = getSharedPreferences("CampusCarePrefs", MODE_PRIVATE);
-                        String userName = prefs.getString("user_name", "User");
-                        Toast.makeText(this, "Sign Up successful! Welcome " + userName, Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "Sign Up successful! Welcome " + Name, Toast.LENGTH_LONG).show();
 
                         Intent intent = new Intent(SignUpPage.this, LogInPage.class);
                         startActivity(intent);
                         finish();
                     } else {
-                        // Show server message (like "Email already exists", or errors)
                         Toast.makeText(this, response, Toast.LENGTH_LONG).show();
                     }
                 },
@@ -70,7 +89,7 @@ public class SignUpPage extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> map = new HashMap<>();
-                // keys must match PHP keys (lowercase)
+                map.put("role", Role);
                 map.put("name", Name);
                 map.put("gender", Gender);
                 map.put("age", Age);
@@ -78,6 +97,7 @@ public class SignUpPage extends AppCompatActivity {
                 map.put("email", Email);
                 map.put("password", Password);
                 map.put("confirmPassword", ConfirmPassword);
+                  // <-- added role here
                 return map;
             }
         };

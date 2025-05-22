@@ -10,22 +10,29 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
 import com.example.CampusCare.Appointment.AppointmentList;
+import com.example.CampusCare.Endpoints.endpoints;
 import com.example.CampusCare.HealthInfoPage;
-import com.example.CampusCare.HistoryPage;
+import com.example.CampusCare.History.HistoryPage;
 import com.example.CampusCare.MessagesPage;
-import com.example.CampusCare.Notification;
-import com.example.CampusCare.ProfilePage;
-import com.example.CampusCare.R;
 import com.example.CampusCare.MedicalInformation.MedicalInformationList;
+import com.example.CampusCare.R;
+import com.example.CampusCare.VolleySingleton;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class HomePage extends AppCompatActivity {
 
-    private ImageButton manIcon, notificationIcon;
-    private Button btnBookAppointment, btnMyDocuments, btnMessages, btnHealthInfo;
-    private TextView welcomeText, appointmentInfo, documentTitle, documentUploadInfo ,name;
-    private BottomNavigationView bottomNavigationView; // Bottom nav
+    private ImageButton manIcon;
+    private Button btnBookAppointment, btnMyDocuments, btnHealthInfo;
+    private TextView welcomeText, appointmentInfo, name;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,86 +41,114 @@ public class HomePage extends AppCompatActivity {
 
         // Initialize views
         manIcon = findViewById(R.id.man_Icon);
-
         btnBookAppointment = findViewById(R.id.btn_book_appointment);
         btnMyDocuments = findViewById(R.id.btn_my_documents);
-        btnMessages = findViewById(R.id.btn_messages);
         btnHealthInfo = findViewById(R.id.btn_health_info);
-
         welcomeText = findViewById(R.id.welcome_text);
         name = findViewById(R.id.name);
         appointmentInfo = findViewById(R.id.appointment_info);
-        documentTitle = findViewById(R.id.document_title);
-        documentUploadInfo = findViewById(R.id.document_upload_info);
-
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        // Load user name from SharedPreferences and set to welcome text
+        // Load user data from SharedPreferences
         SharedPreferences prefs = getSharedPreferences("CampusCarePrefs", MODE_PRIVATE);
         String userName = prefs.getString("user_name", "User");
-        String UserId = prefs.getString("user_id", "User");
+        String userIdStr = prefs.getString("user_id", null);
+
         welcomeText.setText("Welcome To CampusCare,");
-
-
-
         name.setText(userName);
 
+        // Fetch and display the next appointment if userId available
+        if (userIdStr != null) {
+            try {
+                int userId = Integer.parseInt(userIdStr);
+                fetchNextAppointment(userId);
+            } catch (NumberFormatException e) {
+                appointmentInfo.setText("Invalid user ID.");
+            }
+        } else {
+            appointmentInfo.setText("User ID not found.");
+        }
 
         // Top icon click
-        manIcon.setOnClickListener(v -> {
-            Toast.makeText(HomePage.this, "Profile icon clicked", Toast.LENGTH_SHORT).show();
-        });
-
+        manIcon.setOnClickListener(v ->
+                Toast.makeText(HomePage.this, "Profile icon clicked", Toast.LENGTH_SHORT).show()
+        );
 
         // Main buttons click
         btnBookAppointment.setOnClickListener(v -> {
-            Intent intent = new Intent(HomePage.this, AppointmentList.class);
-            startActivity(intent);
+            startActivity(new Intent(HomePage.this, AppointmentList.class));
         });
 
         btnMyDocuments.setOnClickListener(v -> {
-            Intent intent = new Intent(HomePage.this, MedicalInformationList.class);
-            startActivity(intent);
+            startActivity(new Intent(HomePage.this, MedicalInformationList.class));
         });
 
-        btnMessages.setOnClickListener(v -> {
-            Intent intent = new Intent(HomePage.this, MessagesPage.class);
-            startActivity(intent);
-        });
 
         btnHealthInfo.setOnClickListener(v -> {
-            Intent intent = new Intent(HomePage.this, HealthInfoPage.class);
-            startActivity(intent);
+            startActivity(new Intent(HomePage.this, HealthInfoPage.class));
         });
 
         // Bottom Navigation click
         bottomNavigationView.setSelectedItemId(R.id.nav_home);
-
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_home) {
                 Toast.makeText(HomePage.this, "Home selected", Toast.LENGTH_SHORT).show();
                 return true;
-
             } else if (id == R.id.nav_history) {
                 Toast.makeText(HomePage.this, "History selected", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(HomePage.this, HistoryPage.class);
-                startActivity(intent);
+                startActivity(new Intent(HomePage.this, HistoryPage.class));
                 return true;
-
             } else if (id == R.id.nav_messages) {
                 Toast.makeText(HomePage.this, "Messages selected", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(HomePage.this, MessagesPage.class);
-                startActivity(intent);
+                startActivity(new Intent(HomePage.this, MessagesPage.class));
                 return true;
-
             } else if (id == R.id.nav_profile) {
                 Toast.makeText(HomePage.this, "Profile selected", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(HomePage.this, ProfilePage.class);
-                startActivity(intent);
+                startActivity(new Intent(HomePage.this, ProfilePage.class));
                 return true;
             }
             return false;
         });
+    }
+
+    private void fetchNextAppointment(int userId) {
+
+        StringRequest request = new StringRequest(Request.Method.POST, endpoints.nextAppointment,
+                response -> {
+                    try {
+                        JSONObject json = new JSONObject(response);
+                        if (json.getBoolean("success")) {
+                            JSONObject data = json.getJSONObject("data");
+
+                            String doctor = data.getString("doctor_name");
+                            String date = data.getString("date");
+                            String time = data.getString("time");
+
+                            String appointmentText = "Doctor: " + doctor + "\nDate: " + date + "\t\t\ttime: " + time;
+                            appointmentInfo.setText(appointmentText);
+                        } else {
+                            appointmentInfo.setText("No upcoming appointment.");
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        appointmentInfo.setText("Error loading appointment.");
+                    }
+                },
+                error -> {
+                    error.printStackTrace();
+                    appointmentInfo.setText("Network error.");
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("action", "next");
+                params.put("user_id", String.valueOf(userId));
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(this).addToRequestQueue(request);
     }
 }

@@ -16,7 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.example.CampusCare.Endpoints.endpoints;
+import com.example.CampusCare.History.HistoryPage;
 import com.example.CampusCare.HomeDashboard.HomePage;
+import com.example.CampusCare.HomeDashboard.ProfilePage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;

@@ -1,0 +1,95 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@drawable/bg_gradient"
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:id="@+id/tvMedicalInfo"
+            android:text="Update Medical Information"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#212121"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp" />
+
+        <EditText
+            android:id="@+id/etFullName"
+            android:hint="Full Name"
+            android:inputType="textPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:textColorHint="@color/black"/>
+
+        <EditText
+            android:id="@+id/etDOB"
+            android:hint="Date of Birth (YYYY-MM-DD)"
+            android:inputType="date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:textColorHint="@color/black"/>
+
+        <EditText
+            android:id="@+id/etBloodType"
+            android:hint="Blood Type"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:textColorHint="@color/black"/>
+
+        <EditText
+            android:id="@+id/etMedicalConditions"
+            android:hint="Medical Conditions"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:layout_marginBottom="20dp"
+            android:textColorHint="@color/black"
+            android:lines="2"/>
+
+        <EditText
+            android:id="@+id/etAllergies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="top"
+            android:hint="Allergies"
+            android:inputType="textMultiLine"
+            android:textColorHint="@color/black"
+            android:lines="2"/>
+
+        <EditText
+            android:id="@+id/etMedications"
+            android:hint="Medications"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:layout_marginBottom="20dp"
+            android:textColorHint="@color/black"
+            android:lines="2"/>
+
+        <Button
+            android:id="@+id/btnUpdateMedical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/black"
+            android:textSize="18sp"
+            android:text="Update" />
+    </LinearLayout>
+</ScrollView>

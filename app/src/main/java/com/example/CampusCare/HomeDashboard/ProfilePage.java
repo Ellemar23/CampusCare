@@ -1,45 +1,48 @@
-package com.example.CampusCare;
+package com.example.CampusCare.HomeDashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.CampusCare.HomeDashboard.HomePage;
+import com.example.CampusCare.History.HistoryPage;
+import com.example.CampusCare.MessagesPage;
+import com.example.CampusCare.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class HistoryPage extends AppCompatActivity {
+public class ProfilePage extends AppCompatActivity {
 
 
+    private BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.history);
+        setContentView(R.layout.profile);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        bottomNavigationView.setSelectedItemId(R.id.nav_history);
+
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        bottomNavigationView.setSelectedItemId(R.id.nav_profile);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_home) {
-                Intent intent = new Intent(HistoryPage.this, HomePage.class);
+                Intent intent = new Intent(ProfilePage.this, HomePage.class);
                 startActivity(intent);
                 return true;
 
             } else if (id == R.id.nav_history) {
+                Intent intent = new Intent(ProfilePage.this, HistoryPage.class);
+                startActivity(intent);
                 return true;
 
             } else if (id == R.id.nav_messages) {
-                // Navigate to MessagesPage
-                Intent intent = new Intent(HistoryPage.this, MessagesPage.class);
+                Intent intent = new Intent(ProfilePage.this, MessagesPage.class);
                 startActivity(intent);
                 return true;
 
             } else if (id == R.id.nav_profile) {
-                // Navigate to ProfilePage
-                Intent intent = new Intent(HistoryPage.this, ProfilePage.class);
-                startActivity(intent);
                 return true;
             }
             return false;

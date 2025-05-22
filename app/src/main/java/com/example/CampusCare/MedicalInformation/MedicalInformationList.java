@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 import android.content.SharedPreferences;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,7 +34,7 @@ public class MedicalInformationList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState); // ✅ Correct usage
         setContentView(R.layout.activity_medical_information);
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -49,14 +50,20 @@ public class MedicalInformationList extends AppCompatActivity {
             startActivity(intent);
         });
 
-        fetchMedicalHistoryList();
+        // Initial load
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        historyList.clear(); // Clear old data
+        fetchMedicalHistoryList(); //  Reload fresh data when user returns
     }
 
     private void fetchMedicalHistoryList() {
         SharedPreferences prefs = getSharedPreferences("CampusCarePrefs", MODE_PRIVATE);
         String userId = prefs.getString("user_id", "-1");
 
-        // Only block access if not logged in
         if (userId.equals("-1")) {
             Toast.makeText(this, "User not logged in. Please login again.", Toast.LENGTH_SHORT).show();
             return;

@@ -1,13 +1,14 @@
 package com.example.CampusCare.MedicalInformation;
 
-
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -24,8 +25,9 @@ import java.util.Map;
 
 public class ViewmedicalInfo extends AppCompatActivity {
 
-    TextView dateD , fullname, dob, bloodType, medicalConditions, allergies, medications;
+    TextView dateD, fullname, dob, bloodType, medicalConditions, allergies, medications;
     Button Delete, Update;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +37,16 @@ public class ViewmedicalInfo extends AppCompatActivity {
         fullname = findViewById(R.id.tvFullName);
         dob = findViewById(R.id.tvDOB);
         bloodType = findViewById(R.id.tvBloodType);
-        medicalConditions =findViewById(R.id.tvMedicalConditions);
+        medicalConditions = findViewById(R.id.tvMedicalConditions);
         allergies = findViewById(R.id.tvAllergies);
         medications = findViewById(R.id.tvMedications);
         dateD = findViewById(R.id.tvDate);
-        //Delete = findViewById(R.id.delete);
-        //pdate = findViewById(R.id.update);
+        Delete = findViewById(R.id.delete);
+        Update = findViewById(R.id.update);
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Deleting...");
+        progressDialog.setCancelable(false);
 
         SharedPreferences prefs = getSharedPreferences("CampusCarePrefs", MODE_PRIVATE);
         String userIdStr = prefs.getString("user_id", "-1");
@@ -53,18 +58,36 @@ public class ViewmedicalInfo extends AppCompatActivity {
         }
 
         int userId = Integer.parseInt(userIdStr);
-        fetchMedicalInfo(userId);
-    }
-
-
-    private void fetchMedicalInfo(int userId) {
         String date = getIntent().getStringExtra("dateCreated");
+
         if (date == null) {
             Toast.makeText(this, "No date specified.", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
 
+        fetchMedicalInfo(userId, date);
+
+        // Delete button
+
+        Delete.setOnClickListener(v -> {
+            new AlertDialog.Builder(this)
+                    .setTitle("Delete Appointment")
+                    .setMessage("Are you sure you want to delete this appointment?")
+                    .setPositiveButton("Yes", (dialog, which) -> deleteMedicalInfo(userId, date))
+                    .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                    .show();
+        });
+
+        // Update button
+        Update.setOnClickListener(v -> {
+            Intent intent = new Intent(ViewmedicalInfo.this, UpdateMedical.class);
+            intent.putExtra("dateCreated", date);
+            startActivity(intent);
+        });
+    }
+
+    private void fetchMedicalInfo(int userId, String date) {
         StringRequest request = new StringRequest(Request.Method.POST, endpoints.MedicalInfo,
                 response -> {
                     try {
@@ -78,7 +101,6 @@ public class ViewmedicalInfo extends AppCompatActivity {
                             allergies.setText(data.getString("allergies"));
                             medications.setText(data.getString("medications"));
                             dateD.setText(data.getString("date"));
-
                         } else {
                             Toast.makeText(this, "Data not found for this record.", Toast.LENGTH_SHORT).show();
                         }
@@ -101,4 +123,40 @@ public class ViewmedicalInfo extends AppCompatActivity {
         VolleySingleton.getInstance(this).addToRequestQueue(request);
     }
 
+    private void deleteMedicalInfo(int userId, String date) {
+        progressDialog.show();
+
+        StringRequest request = new StringRequest(Request.Method.POST, endpoints.DeleteMedicalInfo,
+                response -> {
+                    progressDialog.dismiss();
+                    try {
+                        JSONObject obj = new JSONObject(response);
+                        if (obj.getBoolean("success")) {
+                            Toast.makeText(this, "Deleted successfully", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(this, "Failed to delete: " + obj.getString("message"), Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (JSONException e) {
+                        Toast.makeText(this, "Invalid server response", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+                },
+                error -> {
+                    progressDialog.dismiss();
+                    Toast.makeText(this, "Network error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("action", "delete"); // ✅ Required for routing
+                params.put("user_id", String.valueOf(userId));
+                params.put("date", date);
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(this).addToRequestQueue(request);
+    }
 }

@@ -8,6 +8,7 @@
     tools:context=".HomeDashboard.HomePage">
 
     <!-- Bottom Navigation -->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -79,7 +80,7 @@
                 android:id="@+id/appointment_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Appointments"
+                android:text="Next  Appointments"
                 android:textColor="#1B5E20"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -90,7 +91,7 @@
                 android:id="@+id/appointment_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12sp"
                 android:text="Date and time of the appointment"
                 android:textColor="#2E7D32"
                 app:layout_constraintStart_toStartOf="parent"
@@ -109,95 +110,64 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appointment_card" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/document_card"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/document_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@android:color/white"
-            android:elevation="2dp"
-            android:padding="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="356dp"
+            android:text="Prescription - date and year"
+            android:textColor="#1E88E5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recent_documents_title">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/document_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Prescription - date and year"
-                android:textColor="#1E88E5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/document_upload_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Uploaded: April 21"
-                android:textColor="#757575"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/document_title" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/document_upload_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Uploaded: April 21"
+            android:textColor="#757575"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/document_title" />
 
         <!-- Buttons Grid -->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/grid_buttons"
-            android:layout_width="0dp"
+
+
+        <Button
+            android:id="@+id/btn_book_appointment"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="37dp"
+            android:backgroundTint="#1E88E5"
+            android:text="My Appointment"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toStartOf="@id/btn_my_documents"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/document_card">
+            app:layout_constraintTop_toBottomOf="@+id/document_upload_info" />
 
-            <Button
-                android:id="@+id/btn_book_appointment"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#1E88E5"
-                android:text="Book Appointment"
-                android:textColor="#FFFFFF"
-                app:layout_constraintEnd_toStartOf="@id/btn_my_documents"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/btn_health_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#43A047"
+            android:text="Health Info"
+            android:textColor="#FFFFFF"
+            app:layout_constraintTop_toBottomOf="@+id/btn_my_documents"
+            tools:layout_editor_absoluteX="16dp" />
 
-            <Button
-                android:id="@+id/btn_my_documents"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#43A047"
-                android:text="My Documents"
-                android:textColor="#FFFFFF"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btn_book_appointment"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/btn_messages"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:backgroundTint="#1E88E5"
-                android:text="Messages"
-                android:textColor="#FFFFFF"
-                app:layout_constraintEnd_toStartOf="@id/btn_health_info"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_book_appointment" />
-
-            <Button
-                android:id="@+id/btn_health_info"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:backgroundTint="#43A047"
-                android:text="Health Info"
-                android:textColor="#FFFFFF"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btn_messages"
-                app:layout_constraintTop_toBottomOf="@id/btn_my_documents" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/btn_my_documents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#43A047"
+            android:text="My Medical Information"
+            android:textColor="#FFFFFF"
+            app:layout_constraintTop_toBottomOf="@+id/btn_book_appointment"
+            tools:layout_editor_absoluteX="16dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
