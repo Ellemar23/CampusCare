@@ -41,6 +41,8 @@ public class HistoryPage extends AppCompatActivity {
         setContentView(R.layout.history);
 
 
+
+
         SharedPreferences prefs = getSharedPreferences("CampusCarePrefs", MODE_PRIVATE);
         String userName = prefs.getString("user_name", "User");
         String userIdStr = prefs.getString("user_id", null);
@@ -81,7 +83,13 @@ public class HistoryPage extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         // Fetch data from API
-        fetchHistory();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fetchHistory(); // Auto-refresh appointments whenever this activity is visible
     }
 
     private void fetchHistory() {

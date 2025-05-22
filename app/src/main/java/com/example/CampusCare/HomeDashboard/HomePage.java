@@ -112,6 +112,25 @@ public class HomePage extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences prefs = getSharedPreferences("CampusCarePrefs", MODE_PRIVATE);
+        String userIdStr = prefs.getString("user_id", null);
+
+        if (userIdStr != null) {
+            try {
+                int userId = Integer.parseInt(userIdStr);
+                fetchNextAppointment(userId); // ✅ Correctly call the method with userId
+            } catch (NumberFormatException e) {
+                appointmentInfo.setText("Invalid user ID.");
+            }
+        } else {
+            appointmentInfo.setText("User ID not found.");
+        }
+    }
+
     private void fetchNextAppointment(int userId) {
 
         StringRequest request = new StringRequest(Request.Method.POST, endpoints.nextAppointment,
