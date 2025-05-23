@@ -12,9 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.example.CampusCare.History.HistoryPage;
 import com.example.CampusCare.HomeDashboard.HomePage;
-import com.example.CampusCare.HomeDashboard.ProfilePage;
-import com.example.CampusCare.MessagesPage;
+import com.example.CampusCare.Profile.ProfilePage;
 import com.example.CampusCare.R;
 import com.example.CampusCare.VolleySingleton;
 import com.example.CampusCare.Endpoints.endpoints;
@@ -39,16 +39,13 @@ public class ViewAppointment extends AppCompatActivity {
         setContentView(R.layout.view_appointment);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.nav_history);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_home) {
                 startActivity(new Intent(ViewAppointment.this, HomePage.class));
                 return true;
             } else if (id == R.id.nav_history) {
-                return true;
-            } else if (id == R.id.nav_messages) {
-                startActivity(new Intent(ViewAppointment.this, MessagesPage.class));
+                startActivity(new Intent(ViewAppointment.this, HistoryPage.class));
                 return true;
             } else if (id == R.id.nav_profile) {
                 startActivity(new Intent(ViewAppointment.this, ProfilePage.class));

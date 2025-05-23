@@ -14,10 +14,10 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.example.CampusCare.Appointment.AppointmentList;
 import com.example.CampusCare.Endpoints.endpoints;
-import com.example.CampusCare.HealthInfoPage;
+import com.example.CampusCare.HealthInfo.HealthInfoPage;
 import com.example.CampusCare.History.HistoryPage;
-import com.example.CampusCare.MessagesPage;
-import com.example.CampusCare.MedicalInformation.MedicalInformationList;
+import com.example.CampusCare.MedicalInformation.MedicalHistoryList;
+import com.example.CampusCare.Profile.ProfilePage;
 import com.example.CampusCare.R;
 import com.example.CampusCare.VolleySingleton;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -80,7 +80,7 @@ public class HomePage extends AppCompatActivity {
         });
 
         btnMyDocuments.setOnClickListener(v -> {
-            startActivity(new Intent(HomePage.this, MedicalInformationList.class));
+            startActivity(new Intent(HomePage.this, MedicalHistoryList.class));
         });
 
 
@@ -93,18 +93,12 @@ public class HomePage extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_home) {
-                Toast.makeText(HomePage.this, "Home selected", Toast.LENGTH_SHORT).show();
                 return true;
             } else if (id == R.id.nav_history) {
-                Toast.makeText(HomePage.this, "History selected", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(HomePage.this, HistoryPage.class));
                 return true;
-            } else if (id == R.id.nav_messages) {
-                Toast.makeText(HomePage.this, "Messages selected", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(HomePage.this, MessagesPage.class));
-                return true;
+
             } else if (id == R.id.nav_profile) {
-                Toast.makeText(HomePage.this, "Profile selected", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(HomePage.this, ProfilePage.class));
                 return true;
             }

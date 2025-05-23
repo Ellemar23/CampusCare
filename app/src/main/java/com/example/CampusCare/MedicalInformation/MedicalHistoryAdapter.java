@@ -23,16 +23,17 @@ public class MedicalHistoryAdapter extends RecyclerView.Adapter<MedicalHistoryAd
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvDate;
+        TextView tvName;
 
         public ViewHolder(View view) {
             super(view);
             tvDate = view.findViewById(R.id.tvDate);
+            tvName = view.findViewById(R.id.tvName);
         }
     }
 
     @Override
     public MedicalHistoryAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // Fix: remove space in getContext()
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_medical_history, parent, false);
         return new ViewHolder(view);
     }
@@ -41,10 +42,11 @@ public class MedicalHistoryAdapter extends RecyclerView.Adapter<MedicalHistoryAd
     public void onBindViewHolder(MedicalHistoryAdapter.ViewHolder holder, int position) {
         MedicalHistory history = medicalHistoryList.get(position);
         holder.tvDate.setText(history.getDateCreated());
+        holder.tvName.setText(history.getName());
 
         holder.itemView.setOnClickListener(v -> {
             Context context = v.getContext();
-            Intent intent = new Intent(context, ViewmedicalInfo.class);
+            Intent intent = new Intent(context, ViewmedicalHistory.class);
             intent.putExtra("dateCreated", history.getDateCreated());
             context.startActivity(intent);
         });

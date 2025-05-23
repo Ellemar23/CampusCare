@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -34,18 +36,23 @@
         <activity android:name="com.example.CampusCare.HomeDashboard.HomePage" />
         <activity android:name="com.example.CampusCare.HomeDashboard.SignUpPage" />
         <activity android:name="com.example.CampusCare.History.HistoryPage" />
-        <activity android:name="com.example.CampusCare.HomeDashboard.ProfilePage" />
-        <activity android:name="com.example.CampusCare.MessagesPage" />
+        <activity android:name="com.example.CampusCare.Profile.ProfilePage" />
         <activity android:name="com.example.CampusCare.Notification" />
-        <activity android:name="com.example.CampusCare.HealthInfoPage" />
-        <activity android:name="com.example.CampusCare.MedicalInformation.AddMedicalInfornation" />
-        <activity android:name="com.example.CampusCare.MedicalInformation.ViewmedicalInfo" />
-        <activity android:name="com.example.CampusCare.MedicalInformation.MedicalInformationList" />
+        <activity android:name="com.example.CampusCare.HealthInfo.HealthInfoPage" />
+        <activity android:name="com.example.CampusCare.MedicalInformation.AddMedicalHistory" />
+        <activity android:name="com.example.CampusCare.MedicalInformation.ViewmedicalHistory" />
+        <activity android:name="com.example.CampusCare.MedicalInformation.MedicalHistoryList" />
         <activity android:name="com.example.CampusCare.Appointment.AppointmentList" />
         <activity android:name="com.example.CampusCare.Appointment.ViewAppointment" />
         <activity android:name="com.example.CampusCare.Appointment.UpdateAppointment" />
         <activity android:name="com.example.CampusCare.HomeDashboard.OtpVerificationPage" />
-        <activity android:name="com.example.CampusCare.MedicalInformation.UpdateMedical" />
+        <activity android:name="com.example.CampusCare.MedicalInformation.UpdateMedicalHistory" />
+        <activity android:name="com.example.CampusCare.Profile.DeleteAccount" />
+        <activity android:name="com.example.CampusCare.HomeDashboard.AboutUs" />
+        <activity android:name="com.example.CampusCare.HealthInfo.EditHealthInfoPage" />
+
+
+
 
 
 

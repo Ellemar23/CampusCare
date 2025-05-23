@@ -1,6 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Blood Group -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Blood Type"
+            android:textSize="16sp"
+            android:paddingBottom="4dp" />
+
+        <!-- Height -->
+
+        <EditText
+            android:id="@+id/edt_blood_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:enabled="false"
+            android:padding="8dp"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Height"
+            android:textSize="16sp"
+            android:paddingTop="12dp"
+            android:paddingBottom="4dp" />
+        <EditText
+            android:id="@+id/edt_height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:background="@android:color/transparent"
+            android:textSize="16sp"
+            android:padding="8dp" />
+
+        <!-- Weight -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weight"
+            android:textSize="16sp"
+            android:paddingTop="12dp"
+            android:paddingBottom="4dp" />
+        <EditText
+            android:id="@+id/edt_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:background="@android:color/transparent"
+            android:textSize="16sp"
+            android:padding="8dp" />
+
+        <!-- Allergies -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Allergies"
+            android:textSize="16sp"
+            android:paddingTop="12dp"
+            android:paddingBottom="4dp" />
+        <EditText
+            android:id="@+id/edt_allergies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:background="@android:color/transparent"
+            android:textSize="16sp"
+            android:padding="8dp" />
+
+        <!-- Conditions -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Conditions"
+            android:textSize="16sp"
+            android:paddingTop="12dp"
+            android:paddingBottom="4dp" />
+        <EditText
+            android:id="@+id/edt_conditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:background="@android:color/transparent"
+            android:textSize="16sp"
+            android:padding="8dp" />
+
+        <!-- Medications -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medications"
+            android:textSize="16sp"
+            android:paddingTop="12dp"
+            android:paddingBottom="4dp" />
+        <EditText
+            android:id="@+id/edt_medications"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:background="@android:color/transparent"
+            android:textSize="16sp"
+            android:padding="8dp" />
+
+        <!-- Last Checkup Date -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last Checkup Date"
+            android:textSize="16sp"
+            android:paddingTop="12dp"
+            android:paddingBottom="4dp" />
+        <EditText
+            android:id="@+id/edt_checkup_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:background="@android:color/transparent"
+            android:textSize="16sp"
+            android:padding="8dp" />
+
+        <!-- Emergency Contact -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Emergency Contact"
+            android:textSize="16sp"
+            android:paddingTop="12dp"
+            android:paddingBottom="4dp" />
+        <EditText
+            android:id="@+id/edt_emergency_contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:background="@android:color/transparent"
+            android:textSize="16sp"
+            android:padding="8dp" />
+
+        <Button
+            android:id="@+id/edit_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            android:textSize="16sp"
+            android:paddingTop="12dp"
+            android:paddingBottom="4dp"/>
+
+    </LinearLayout>
+</ScrollView>

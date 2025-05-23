@@ -1,0 +1,169 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@drawable/bg_gradient">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/tvMedicalInfo"
+            android:text="Update Medical Information"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#212121"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp" />
+
+        <EditText
+            android:id="@+id/etName"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/black"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etPastDiagnoses"
+            android:hint="Past Diagnoses"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|start"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/black"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etPreviousSurgeries"
+            android:hint="Previous Surgeries"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|start"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/black"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etChronicConditions"
+            android:hint="Chronic Conditions"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|start"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/black"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etHospitalizations"
+            android:hint="Hospitalizations"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|start"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/black"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etAllergies"
+            android:hint="Allergies"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|start"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/black"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etMedicationsHistory"
+            android:hint="Medications History"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|start"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/black"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etVaccinationRecords"
+            android:hint="Vaccination Records"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|start"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/black"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etFamilyMedicalHistory"
+            android:hint="Family Medical History"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|start"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/black"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etLifestyleFactors"
+            android:hint="Lifestyle Factors"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|start"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/black"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etDoctorNotes"
+            android:hint="Doctor Notes"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|start"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/black"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etLabTestResults"
+            android:hint="Lab Test Results"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|start"
+            android:layout_marginBottom="24dp"
+            android:textColorHint="@color/black"
+            android:padding="12dp" />
+
+        <Button
+            android:id="@+id/update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/black"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:text="Update"
+            android:padding="14dp"
+            android:elevation="4dp"
+            android:layout_marginBottom="20dp"/>
+    </LinearLayout>
+</ScrollView>

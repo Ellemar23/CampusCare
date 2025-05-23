@@ -3,6 +3,7 @@ package com.example.CampusCare.HomeDashboard;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -78,6 +79,11 @@ public class LogInPage extends AppCompatActivity {
 
             loginUser(emailStr, passStr);
         });
+
+
+        // Save to SharedPreferences
+
+
     }
 
     private void loginUser(String emailStr, String passStr) {
@@ -87,16 +93,28 @@ public class LogInPage extends AppCompatActivity {
                 response -> {
                     progressDialog.dismiss(); //  Hide loading
 
+
+
                     if (response.startsWith("otp_sent:")) {
                         String[] parts = response.split(":");
-                        if (parts.length >= 3) {
+                        if (parts.length >= 4) {
                             String userId = parts[1];
                             String userName = parts[2];
+                            String userRole = parts[3];
+
+                            SharedPreferences prefs = getSharedPreferences("CampusCarePrefs", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putString("userName", userName);
+                            editor.putString("userRole", userRole);
+                            editor.putString("email", emailStr);
+                            editor.apply();
+
                             Toast.makeText(this, "Welcome, " + userName, Toast.LENGTH_SHORT).show();
 
                             Intent intent = new Intent(LogInPage.this, OtpVerificationPage.class);
                             intent.putExtra("userId", userId);
                             intent.putExtra("userName", userName);
+                            intent.putExtra("userRole", userRole);  // ✅ pass role
                             intent.putExtra("email", emailStr);
                             startActivity(intent);
                             finish();
@@ -114,6 +132,7 @@ public class LogInPage extends AppCompatActivity {
                 error -> {
                     progressDialog.dismiss(); // ✅ Hide loading
                     Toast.makeText(this, "Network error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+
                 }
         ) {
             @Override

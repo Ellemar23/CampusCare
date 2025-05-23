@@ -1,10 +1,10 @@
 package com.example.CampusCare.MedicalInformation;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
-import android.content.SharedPreferences;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.example.CampusCare.Endpoints.endpoints;
+import com.example.CampusCare.History.HistoryPage;
 import com.example.CampusCare.HomeDashboard.HomePage;
-import com.example.CampusCare.HomeDashboard.ProfilePage;
-import com.example.CampusCare.MessagesPage;
+import com.example.CampusCare.Profile.ProfilePage;
 import com.example.CampusCare.R;
 import com.example.CampusCare.VolleySingleton;
-import com.example.CampusCare.Endpoints.endpoints;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
@@ -29,58 +29,63 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MedicalInformationList extends AppCompatActivity {
+public class MedicalHistoryList extends AppCompatActivity {
 
-    Button AddMedicalInfo;
-    RecyclerView recyclerView;
-    List<MedicalHistory> historyList;
-    MedicalHistoryAdapter adapter;
+    private Button btnAddMedicalInfo;
+    private RecyclerView recyclerView;
+    private List<MedicalHistory> historyList;
+    private MedicalHistoryAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState); // ✅ Correct usage
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medical_information);
 
+        setupBottomNavigation();
+        setupRecyclerView();
+        setupAddButton();
+    }
+
+    private void setupBottomNavigation() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.nav_history);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_home) {
-                startActivity(new Intent(MedicalInformationList.this, HomePage.class));
+                startActivity(new Intent(MedicalHistoryList.this, HomePage.class));
                 return true;
             } else if (id == R.id.nav_history) {
-                return true;
-            } else if (id == R.id.nav_messages) {
-                startActivity(new Intent(MedicalInformationList.this, MessagesPage.class));
+                startActivity(new Intent(MedicalHistoryList.this, HistoryPage.class));
                 return true;
             } else if (id == R.id.nav_profile) {
-                startActivity(new Intent(MedicalInformationList.this, ProfilePage.class));
+                startActivity(new Intent(MedicalHistoryList.this, ProfilePage.class));
                 return true;
             }
             return false;
         });
+    }
 
+    private void setupRecyclerView() {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         historyList = new ArrayList<>();
         adapter = new MedicalHistoryAdapter(historyList);
         recyclerView.setAdapter(adapter);
+    }
 
-        AddMedicalInfo = findViewById(R.id.AddMedicalInfo);
-        AddMedicalInfo.setOnClickListener(v -> {
-            Intent intent = new Intent(MedicalInformationList.this, AddMedicalInfornation.class);
+    private void setupAddButton() {
+        btnAddMedicalInfo = findViewById(R.id.AddMedicalInfo);
+        btnAddMedicalInfo.setOnClickListener(v -> {
+            Intent intent = new Intent(MedicalHistoryList.this, AddMedicalHistory.class);
             startActivity(intent);
         });
-
-        // Initial load
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        historyList.clear(); // Clear old data
-        fetchMedicalHistoryList(); //  Reload fresh data when user returns
+        historyList.clear();
+        fetchMedicalHistoryList();
     }
 
     private void fetchMedicalHistoryList() {
@@ -95,14 +100,30 @@ public class MedicalInformationList extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.POST, endpoints.GetMedicalHistoryList,
                 response -> {
                     try {
-                        JSONArray array = new JSONArray(response);
+                        JSONObject jsonResponse = new JSONObject(response);
+                        boolean success = jsonResponse.optBoolean("success", false);
+                        if (!success) {
+                            Toast.makeText(this, "Failed to get medical history list", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        JSONArray array = jsonResponse.optJSONArray("data");
+                        if (array == null) {
+                            Toast.makeText(this, "No medical history data found", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        historyList.clear();
 
                         for (int i = 0; i < array.length(); i++) {
-                            JSONObject item = array.getJSONObject(i);
-                            String dateCreated = item.getString("dateCreated");
-                            String name = item.getString("name");
+                            JSONObject item = array.optJSONObject(i);
+                            if (item == null) continue;
 
-                            MedicalHistory mh = new MedicalHistory(dateCreated, name, "", "", "", "", "");
+                            String dateCreated = item.optString("date", "Unknown Date");  // note key is "date" from PHP, not "dateCreated"
+                            String name = item.optString("name", "Unknown Name");  // Your PHP does not return "name" here though!
+
+                            // You currently only return 'date' from PHP, no 'name'. So 'name' will be "Unknown Name"
+                            MedicalHistory mh = new MedicalHistory(dateCreated, name);
                             historyList.add(mh);
                         }
 
@@ -110,10 +131,10 @@ public class MedicalInformationList extends AppCompatActivity {
 
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        Toast.makeText(this, "Failed to parse list data", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Failed to parse medical history list", Toast.LENGTH_SHORT).show();
                     }
                 },
-                error -> Toast.makeText(this, "Error fetching list", Toast.LENGTH_SHORT).show()
+                error -> Toast.makeText(this, "Error fetching medical history list", Toast.LENGTH_SHORT).show()
         ) {
             @Override
             protected Map<String, String> getParams() {

@@ -14,8 +14,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.CampusCare.Endpoints.endpoints;
 import com.example.CampusCare.HomeDashboard.HomePage;
-import com.example.CampusCare.HomeDashboard.ProfilePage;
-import com.example.CampusCare.MessagesPage;
+import com.example.CampusCare.Profile.ProfilePage;
 import com.example.CampusCare.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -64,9 +63,6 @@ public class HistoryPage extends AppCompatActivity {
                 startActivity(new Intent(this, HomePage.class));
                 return true;
             } else if (id == R.id.nav_history) {
-                return true;
-            } else if (id == R.id.nav_messages) {
-                startActivity(new Intent(this, MessagesPage.class));
                 return true;
             } else if (id == R.id.nav_profile) {
                 startActivity(new Intent(this, ProfilePage.class));

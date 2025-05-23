@@ -11,43 +11,53 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!-- All EditTexts with IDs matching the Java code -->
+
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="50dp"
-            android:textColor="@android:color/black"
             android:gravity="center"
-            android:text="Add Medical Information"
+            android:text="Add Medical History"
+            android:textColor="@android:color/black"
             android:textSize="24sp" />
 
         <EditText
-            android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:hint="Patient Name" />
+            android:hint="Name"
+            android:id="@+id/etName" />
 
         <EditText
-            android:id="@+id/etDOB"
+            android:id="@+id/etPastDiagnoses"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:hint="Date of Birth" />
+            android:hint="Past Diagnoses" />
 
         <EditText
-            android:id="@+id/etBloodType"
+            android:id="@+id/etPreviousSurgeries"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:hint="Blood Type" />
+            android:hint="Previous Surgeries" />
 
         <EditText
-            android:id="@+id/etMedicalConditions"
+            android:id="@+id/etChronicConditions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:hint="Medical Conditions" />
+            android:hint="Chronic Conditions" />
+
+        <EditText
+            android:id="@+id/etHospitalizations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:hint="Hospitalizations" />
 
         <EditText
             android:id="@+id/etAllergies"
@@ -57,14 +67,50 @@
             android:hint="Allergies" />
 
         <EditText
-            android:id="@+id/etMedications"
+            android:id="@+id/etMedicationsHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:hint="Medications History" />
+
+        <EditText
+            android:id="@+id/etVaccinationRecords"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:hint="Vaccination Records" />
+
+        <EditText
+            android:id="@+id/etFamilyMedicalHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:hint="Family Medical History" />
+
+        <EditText
+            android:id="@+id/etLifestyleFactors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:hint="Lifestyle Factors" />
+
+        <EditText
+            android:id="@+id/etDoctorNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:hint="Doctor Notes" />
+
+        <EditText
+            android:id="@+id/etLabTestResults"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="50dp"
-            android:hint="Medications" />
+            android:hint="Lab Test Results" />
 
+        <!-- Save Button -->
         <Button
-            android:id="@+id/btnSaveMedicalInfo"
+            android:id="@+id/btnSaveMedicalHistory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -72,5 +118,6 @@
             android:layout_marginBottom="20dp"
             android:backgroundTint="@color/black"
             android:text="Save Medical History" />
+
     </LinearLayout>
 </ScrollView>
