@@ -116,7 +116,7 @@ public class HomePage extends AppCompatActivity {
         if (userIdStr != null) {
             try {
                 int userId = Integer.parseInt(userIdStr);
-                fetchNextAppointment(userId); // ✅ Correctly call the method with userId
+                fetchNextAppointment(userId);
             } catch (NumberFormatException e) {
                 appointmentInfo.setText("Invalid user ID.");
             }
