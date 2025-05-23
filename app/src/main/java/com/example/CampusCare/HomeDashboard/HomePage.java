@@ -58,6 +58,8 @@ public class HomePage extends AppCompatActivity {
         name.setText(userName);
 
         // Fetch and display the next appointment if userId available
+
+
         if (userIdStr != null) {
             try {
                 int userId = Integer.parseInt(userIdStr);
