@@ -12,6 +12,8 @@ import com.example.CampusCare.R;
 
 import java.util.List;
 
+//Main Coder: Pundavela
+//Delfin
 public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.AppointmentViewHolder> {
 
     private Context context;

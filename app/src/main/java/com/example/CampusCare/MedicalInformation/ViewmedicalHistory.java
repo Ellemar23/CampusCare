@@ -11,13 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
-import com.example.CampusCare.Appointment.AppointmentList;
 import com.example.CampusCare.Endpoints.endpoints;
 import com.example.CampusCare.History.HistoryPage;
 import com.example.CampusCare.HomeDashboard.HomePage;
 import com.example.CampusCare.Profile.ProfilePage;
 import com.example.CampusCare.R;
-import com.example.CampusCare.VolleySingleton;
+import com.example.CampusCare.Endpoints.VolleySingleton;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONException;
@@ -25,7 +24,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
+//MAIN Coder: Pundavela
+//Magallon
 public class ViewmedicalHistory extends AppCompatActivity {
 
     TextView tvDateCreated, tvName, tvPastDiagnoses, tvPreviousSurgeries, tvChronicConditions,

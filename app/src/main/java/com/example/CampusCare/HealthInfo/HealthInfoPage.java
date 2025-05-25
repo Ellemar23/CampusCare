@@ -13,13 +13,14 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.example.CampusCare.Endpoints.endpoints;
 import com.example.CampusCare.R;
-import com.example.CampusCare.VolleySingleton;
+import com.example.CampusCare.Endpoints.VolleySingleton;
 
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
+//MAIN Coder: Pundavela
 public class HealthInfoPage extends AppCompatActivity {
 
     private EditText edtBloodGroup, edtHeight, edtWeight, edtAllergies, edtConditions, edtMedications, edtCheckupDate, edtEmergencyContact;

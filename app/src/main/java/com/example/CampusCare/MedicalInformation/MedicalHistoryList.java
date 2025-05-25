@@ -17,7 +17,7 @@ import com.example.CampusCare.History.HistoryPage;
 import com.example.CampusCare.HomeDashboard.HomePage;
 import com.example.CampusCare.Profile.ProfilePage;
 import com.example.CampusCare.R;
-import com.example.CampusCare.VolleySingleton;
+import com.example.CampusCare.Endpoints.VolleySingleton;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
@@ -28,7 +28,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+//MAIN Coder: Pundavela
+//Magallon
 public class MedicalHistoryList extends AppCompatActivity {
 
     private Button btnAddMedicalInfo;

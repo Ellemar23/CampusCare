@@ -1,5 +1,7 @@
 package com.example.CampusCare.Appointment;
 
+//Main Coder: Pundavela
+//Delfin
 public class AppointmentDetails {
     private String doctorName;
     private String date;

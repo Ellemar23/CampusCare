@@ -12,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.CampusCare.R;
 
 import java.util.List;
-
+//MAIN Coder: Pundavela
+//Magallon
 public class MedicalHistoryAdapter extends RecyclerView.Adapter<MedicalHistoryAdapter.ViewHolder> {
 
     private List<MedicalHistory> medicalHistoryList;

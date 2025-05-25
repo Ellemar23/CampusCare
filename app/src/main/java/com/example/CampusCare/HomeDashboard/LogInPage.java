@@ -18,12 +18,13 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.example.CampusCare.R;
-import com.example.CampusCare.VolleySingleton;
+import com.example.CampusCare.Endpoints.VolleySingleton;
 import com.example.CampusCare.Endpoints.endpoints;
 
 import java.util.HashMap;
 import java.util.Map;
-
+//MAIN Coder: Pundavela
+//Delfin
 public class LogInPage extends AppCompatActivity {
 
     private Button logInButton;
@@ -114,7 +115,7 @@ public class LogInPage extends AppCompatActivity {
                             Intent intent = new Intent(LogInPage.this, OtpVerificationPage.class);
                             intent.putExtra("userId", userId);
                             intent.putExtra("userName", userName);
-                            intent.putExtra("userRole", userRole);  // ✅ pass role
+                            intent.putExtra("userRole", userRole);
                             intent.putExtra("email", emailStr);
                             startActivity(intent);
                             finish();
@@ -130,7 +131,7 @@ public class LogInPage extends AppCompatActivity {
                     }
                 },
                 error -> {
-                    progressDialog.dismiss(); // ✅ Hide loading
+                    progressDialog.dismiss();
                     Toast.makeText(this, "Network error: " + error.getMessage(), Toast.LENGTH_LONG).show();
 
                 }

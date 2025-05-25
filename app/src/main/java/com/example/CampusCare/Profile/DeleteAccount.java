@@ -21,7 +21,8 @@ import com.example.CampusCare.R;
 
 import java.util.HashMap;
 import java.util.Map;
-
+//MAIN Coder: Pundavela
+//Pescadero
 public class DeleteAccount extends AppCompatActivity {
 
     private EditText emailInput, passwordInput;

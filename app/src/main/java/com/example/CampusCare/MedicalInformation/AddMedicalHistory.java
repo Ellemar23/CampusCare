@@ -11,12 +11,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.example.CampusCare.R;
-import com.example.CampusCare.VolleySingleton;
+import com.example.CampusCare.Endpoints.VolleySingleton;
 import com.example.CampusCare.Endpoints.endpoints;
 
 import java.util.HashMap;
 import java.util.Map;
-
+//MAIN Coder: Pundavela
+//Magallon
 public class AddMedicalHistory extends AppCompatActivity {
 
     EditText etName,etPastDiagnoses, etPreviousSurgeries, etChronicConditions, etHospitalizations, etAllergies;

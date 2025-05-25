@@ -12,11 +12,11 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.example.CampusCare.Endpoints.endpoints;
 import com.example.CampusCare.R;
-import com.example.CampusCare.VolleySingleton;
+import com.example.CampusCare.Endpoints.VolleySingleton;
 
 import java.util.HashMap;
 import java.util.Map;
-
+//MAIN Coder: Pundavela
 public class OtpVerificationPage extends AppCompatActivity {
 
     EditText otpInput;

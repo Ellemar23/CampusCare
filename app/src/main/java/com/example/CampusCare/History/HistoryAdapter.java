@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.CampusCare.R;
 
 import java.util.List;
-
+//MAIN Coder: Pundavela
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {
 
     private List<HistoryModel> historyList;

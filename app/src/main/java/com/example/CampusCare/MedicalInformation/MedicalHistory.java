@@ -1,5 +1,6 @@
 package com.example.CampusCare.MedicalInformation;
-
+//MAIN Coder: Pundavela
+//Magallon
 public class MedicalHistory {
     private String dateCreated;
     private String name;

@@ -12,7 +12,7 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.example.CampusCare.R;
-import com.example.CampusCare.VolleySingleton;
+import com.example.CampusCare.Endpoints.VolleySingleton;
 import com.example.CampusCare.Endpoints.endpoints;
 
 import org.json.JSONObject;
@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+//Main Coder: Pundavela
 
 public class UpdateAppointment extends AppCompatActivity {
 

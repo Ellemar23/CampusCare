@@ -19,7 +19,8 @@ import com.example.CampusCare.HomeDashboard.LogInPage;
 import com.example.CampusCare.HomeDashboard.SignUpPage;
 import com.example.CampusCare.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+//MAIN Coder: Pundavela
+//Pescadero
 public class ProfilePage extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;

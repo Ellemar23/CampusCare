@@ -19,14 +19,15 @@ import com.example.CampusCare.History.HistoryPage;
 import com.example.CampusCare.MedicalInformation.MedicalHistoryList;
 import com.example.CampusCare.Profile.ProfilePage;
 import com.example.CampusCare.R;
-import com.example.CampusCare.VolleySingleton;
+import com.example.CampusCare.Endpoints.VolleySingleton;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
+//MAIN Coder: Pundavela
+//Delfin
 public class HomePage extends AppCompatActivity {
 
     private ImageButton manIcon;
@@ -58,6 +59,7 @@ public class HomePage extends AppCompatActivity {
         name.setText(userName);
 
         // Fetch and display the next appointment if userId available
+
 
 
         if (userIdStr != null) {

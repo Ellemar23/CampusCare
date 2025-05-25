@@ -17,7 +17,7 @@ import com.example.CampusCare.History.HistoryPage;
 import com.example.CampusCare.HomeDashboard.HomePage;
 import com.example.CampusCare.Profile.ProfilePage;
 import com.example.CampusCare.R;
-import com.example.CampusCare.VolleySingleton;
+import com.example.CampusCare.Endpoints.VolleySingleton;
 import com.example.CampusCare.Endpoints.endpoints;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -28,7 +28,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+//Main Coder: Pundavela
+//Delfin
 public class AppointmentList extends AppCompatActivity {
 
     Button AddAppointment;

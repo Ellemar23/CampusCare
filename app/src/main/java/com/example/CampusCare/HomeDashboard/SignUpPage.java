@@ -1,7 +1,6 @@
 package com.example.CampusCare.HomeDashboard;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,10 +14,11 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.example.CampusCare.Endpoints.endpoints;
 import com.example.CampusCare.R;
-import com.example.CampusCare.VolleySingleton;
+import com.example.CampusCare.Endpoints.VolleySingleton;
 
 import java.util.HashMap;
 import java.util.Map;
+//MAIN Coder: Pundavela
 
 public class SignUpPage extends AppCompatActivity {
 

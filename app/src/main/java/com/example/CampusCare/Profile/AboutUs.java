@@ -7,7 +7,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.CampusCare.R;
-
+//MAIN Coder: Pundavela
+//Pescadero
 public class AboutUs extends AppCompatActivity {
 
     private TextView aboutText;
