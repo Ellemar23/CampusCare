@@ -82,10 +82,6 @@ public class LogInPage extends AppCompatActivity {
             loginUser(emailStr, passStr);
         });
 
-
-        // Save to SharedPreferences
-
-
     }
 
     private void loginUser(String emailStr, String passStr) {
@@ -104,19 +100,21 @@ public class LogInPage extends AppCompatActivity {
 
                             SharedPreferences prefs = getSharedPreferences("CampusCarePrefs", Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = prefs.edit();
-                            editor.putString("userId", userId);
-                            editor.putString("userName", userName);
+                            editor.putString("user_id", userId);
+                            editor.putString("user_name", userName);
                             editor.putString("userRole", userRole);
                             editor.putString("email", emailStr);
                             editor.apply();
 
-                            Toast.makeText(this, "Welcome, " + userName, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Welcome, " + userName + "ID:"+userId, Toast.LENGTH_SHORT).show();
+
+
 
                             Intent intent;
                             if (userRole.equalsIgnoreCase("Admin")) {
                                 intent = new Intent(LogInPage.this, adminDashboard.class);
                             } else {
-                                intent = new Intent(LogInPage.this, HomePage.class); // Replace with your actual user dashboard activity
+                                intent = new Intent(LogInPage.this, HomePage.class);// Replace with your actual user dashboard activity
                             }
                             startActivity(intent);
                             finish();

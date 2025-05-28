@@ -114,6 +114,7 @@ public class ViewmedicalHistory extends AppCompatActivity {
                         if (obj.getBoolean("success")) {
                             JSONObject data = obj.getJSONObject("data");
 
+
                             tvDateCreated.setText(dateCreated);
                             tvName.setText(data.optString("name", ""));
                             tvPastDiagnoses.setText(data.optString("past_diagnoses", ""));

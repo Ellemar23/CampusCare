@@ -25,9 +25,9 @@ public class ProfilePage extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private TextView usernameText, emailText, roleText;
-    private Button editProfileButton, aboutButton, accountsButton, logoutButton;
+    private Button  aboutButton, logoutButton;
     private Button createAccountButton, deleteAccountButton;
-    private Switch darkModeSwitch;
+
     private SharedPreferences sharedPreferences;
 
     @Override
