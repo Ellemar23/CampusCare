@@ -11,9 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- All EditTexts with IDs matching the Java code -->
-
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,88 +22,136 @@
             android:textSize="24sp" />
 
         <EditText
+            android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:hint="Name"
-            android:id="@+id/etName" />
+            android:background="@drawable/edit_text_rounded"
+            android:textColor="#000000"
+            android:textColorHint="#888888"
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/etPastDiagnoses"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:hint="Past Diagnoses" />
+            android:hint="Past Diagnoses"
+            android:background="@drawable/edit_text_rounded"
+            android:textColor="#000000"
+            android:textColorHint="#888888"
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/etPreviousSurgeries"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:hint="Previous Surgeries" />
+            android:hint="Previous Surgeries"
+            android:background="@drawable/edit_text_rounded"
+            android:textColor="#000000"
+            android:textColorHint="#888888"
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/etChronicConditions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:hint="Chronic Conditions" />
+            android:hint="Chronic Conditions"
+            android:background="@drawable/edit_text_rounded"
+            android:textColor="#000000"
+            android:textColorHint="#888888"
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/etHospitalizations"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:hint="Hospitalizations" />
+            android:hint="Hospitalizations"
+            android:background="@drawable/edit_text_rounded"
+            android:textColor="#000000"
+            android:textColorHint="#888888"
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/etAllergies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:hint="Allergies" />
+            android:hint="Allergies"
+            android:background="@drawable/edit_text_rounded"
+            android:textColor="#000000"
+            android:textColorHint="#888888"
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/etMedicationsHistory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:hint="Medications History" />
+            android:hint="Medications History"
+            android:background="@drawable/edit_text_rounded"
+            android:textColor="#000000"
+            android:textColorHint="#888888"
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/etVaccinationRecords"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:hint="Vaccination Records" />
+            android:hint="Vaccination Records"
+            android:background="@drawable/edit_text_rounded"
+            android:textColor="#000000"
+            android:textColorHint="#888888"
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/etFamilyMedicalHistory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:hint="Family Medical History" />
+            android:hint="Family Medical History"
+            android:background="@drawable/edit_text_rounded"
+            android:textColor="#000000"
+            android:textColorHint="#888888"
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/etLifestyleFactors"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:hint="Lifestyle Factors" />
+            android:hint="Lifestyle Factors"
+            android:background="@drawable/edit_text_rounded"
+            android:textColor="#000000"
+            android:textColorHint="#888888"
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/etDoctorNotes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:hint="Doctor Notes" />
+            android:hint="Doctor Notes"
+            android:background="@drawable/edit_text_rounded"
+            android:textColor="#000000"
+            android:textColorHint="#888888"
+            android:padding="12dp" />
 
         <EditText
             android:id="@+id/etLabTestResults"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="50dp"
-            android:hint="Lab Test Results" />
+            android:hint="Lab Test Results"
+            android:background="@drawable/edit_text_rounded"
+            android:textColor="#000000"
+            android:textColorHint="#888888"
+            android:padding="12dp" />
 
         <!-- Save Button -->
         <Button
@@ -116,8 +161,11 @@
             android:textSize="20sp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:backgroundTint="@color/black"
-            android:text="Save Medical History" />
+            android:backgroundTint="#000000"
+            android:text="Save Medical History"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:padding="12dp" />
 
     </LinearLayout>
 </ScrollView>

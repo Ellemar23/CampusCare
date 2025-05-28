@@ -27,6 +27,8 @@
             android:layout_height="wrap_content"
             android:hint="Blood Type"
             android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp"
             android:textColorHint="@color/black"
             android:textColor="@color/black"/>
 
@@ -36,6 +38,8 @@
             android:layout_height="wrap_content"
             android:hint="Height"
             android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp"
             android:textColorHint="@color/black"
             android:textColor="@color/black"/>
 
@@ -45,7 +49,10 @@
             android:layout_height="wrap_content"
             android:hint="Weight"
             android:layout_marginBottom="20dp"
-            android:textColorHint="@color/black"/>
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/edt_allergies"
@@ -53,6 +60,8 @@
             android:layout_height="wrap_content"
             android:hint="Allergies"
             android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp"
             android:textColorHint="@color/black"
             android:textColor="@color/black"/>
 
@@ -62,6 +71,8 @@
             android:layout_height="wrap_content"
             android:hint="Conditions"
             android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp"
             android:textColorHint="@color/black"
             android:textColor="@color/black"/>
 
@@ -71,6 +82,8 @@
             android:layout_height="wrap_content"
             android:hint="Medications"
             android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp"
             android:textColorHint="@color/black"
             android:textColor="@color/black"/>
 
@@ -81,6 +94,8 @@
             android:enabled="false"
             android:hint="Last Checkup Date"
             android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp"
             android:textColorHint="@color/black"
             android:textColor="@color/black"/>
 
@@ -90,6 +105,8 @@
             android:layout_height="wrap_content"
             android:hint="Emergency Contact"
             android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp"
             android:textColorHint="@color/black"
             android:textColor="@color/black"/>
 
@@ -99,8 +116,9 @@
             android:layout_height="wrap_content"
             android:text="Save"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="20dp"
             android:backgroundTint="@color/black"
-            android:layout_marginBottom="20dp"/>
-
+            android:textColor="@android:color/white"
+            android:textStyle="bold"/>
     </LinearLayout>
 </ScrollView>

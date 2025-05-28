@@ -9,6 +9,7 @@
     android:background="@drawable/bg_gradient"
     tools:context=".HomeDashboard.OtpVerificationPage">
 
+    <!-- Title -->
     <TextView
         android:id="@+id/otp_title"
         android:layout_width="wrap_content"
@@ -22,6 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <!-- OTP Input Field with custom white background -->
     <EditText
         android:id="@+id/otp_input"
         android:layout_width="0dp"
@@ -32,10 +34,12 @@
         android:maxLength="6"
         android:padding="14dp"
         android:textSize="16sp"
+        android:background="@drawable/otp_edittext_bg"
         app:layout_constraintTop_toBottomOf="@id/otp_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <!-- Verify OTP Button -->
     <Button
         android:id="@+id/verify_button"
         android:layout_width="0dp"
