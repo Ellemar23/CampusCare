@@ -54,12 +54,11 @@ public class OtpVerificationPage extends AppCompatActivity {
                         // Save user session info
                         getSharedPreferences("CampusCarePrefs", MODE_PRIVATE)
                                 .edit()
-                                .putString("user_id", userId)
                                 .putString("user_name", userName)
                                 .apply();
 
-                        Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(OtpVerificationPage.this, HomePage.class));
+                        Toast.makeText(this, "Email Verified", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(OtpVerificationPage.this, LogInPage.class));
                         finish();
 
                     } else if (response.equals("invalid_or_expired_otp")) {

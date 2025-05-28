@@ -1,5 +1,6 @@
 package com.example.CampusCare.HomeDashboard;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.example.CampusCare.Endpoints.endpoints;
@@ -26,10 +28,16 @@ public class SignUpPage extends AppCompatActivity {
     EditText email, password, confirmPassword, name, age, contact;
     RadioGroup genderGroup, roleGroup;
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Creating...");
+        progressDialog.setCancelable(false);
 
         email = findViewById(R.id.email);
         password = findViewById(R.id.Password);
@@ -78,18 +86,39 @@ public class SignUpPage extends AppCompatActivity {
     }
 
     private void signUp(String Email, String Password, String ConfirmPassword, String Name, String Age, String Gender, String Contact, String Role) {
+        progressDialog.show();
         StringRequest request = new StringRequest(Request.Method.POST, endpoints.SIGNUP,
                 response -> {
-                    if (response.equals("success")) {
-                        Toast.makeText(this, "Sign Up successful! Welcome " + Name, Toast.LENGTH_LONG).show();
+                    if (response.startsWith("otp_sent:")) {
+                        progressDialog.dismiss();
+                        String[] parts = response.split(":");
+                        if (parts.length >= 4) {
+                            String userId = parts[1];
+                            String userName = parts[2];
+                            String userRole = parts[3];
 
-                        Intent intent = new Intent(SignUpPage.this, LogInPage.class);
-                        startActivity(intent);
-                        finish();
+                            Toast.makeText(this, "OTP sent to your email. Please verify.", Toast.LENGTH_LONG).show();
+
+                            Intent intent = new Intent(SignUpPage.this, OtpVerificationPage.class);
+                            intent.putExtra("userId", userId);
+                            intent.putExtra("userName", userName);
+                            intent.putExtra("userRole", userRole);
+                            intent.putExtra("email", Email);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(this, "Unexpected response from server", Toast.LENGTH_LONG).show();
+                        }
+                    } else if (response.equals("email_exists")) {
+                        Toast.makeText(this, "Email is already registered", Toast.LENGTH_LONG).show();
+                    } else if (response.equals("password_mismatch")) {
+                        Toast.makeText(this, "Passwords do not match", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(this, response, Toast.LENGTH_LONG).show();
                     }
+                    progressDialog.dismiss();
                 },
+
                 error -> Toast.makeText(this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show()
         ) {
             @Override
@@ -103,11 +132,16 @@ public class SignUpPage extends AppCompatActivity {
                 map.put("email", Email);
                 map.put("password", Password);
                 map.put("confirmPassword", ConfirmPassword);
-                  // <-- added role here
                 return map;
             }
         };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                5000,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
 
         VolleySingleton.getInstance(this).addToRequestQueue(request);
     }
+
 }

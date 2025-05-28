@@ -53,6 +53,7 @@
         <activity android:name="com.example.CampusCare.ADMIN.adminDashboard" />
         <activity android:name="com.example.CampusCare.ADMIN.adminDoctorAvail" />
         <activity android:name="com.example.CampusCare.ADMIN.adminHoliday" />
+        <activity android:name="com.example.CampusCare.ADMIN.adminAppointment" />
 
 
 

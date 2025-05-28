@@ -43,6 +43,9 @@ public class endpoints {
     public static final String CheckHoliday = BASE_URL + "holiday.php?action=check";
     public static final String holidayList = BASE_URL + "holiday.php?action=list";
 
+    public static final String setLimit = BASE_URL + "appointments.php?action=set_limit";
+    public static final String fetch_all_appointments = BASE_URL + "adminAppointment.php?action=all_appointments";
+
 
 
 

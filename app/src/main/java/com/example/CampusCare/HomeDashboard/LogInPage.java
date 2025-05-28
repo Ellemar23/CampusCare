@@ -89,15 +89,13 @@ public class LogInPage extends AppCompatActivity {
     }
 
     private void loginUser(String emailStr, String passStr) {
-        progressDialog.show(); //  Show loading
+        progressDialog.show(); // Show loading
 
         StringRequest request = new StringRequest(Request.Method.POST, endpoints.LOGIN,
                 response -> {
-                    progressDialog.dismiss(); //  Hide loading
+                    progressDialog.dismiss(); // Hide loading
 
-
-
-                    if (response.startsWith("otp_sent:")) {
+                    if (response.startsWith("login_success:")) {
                         String[] parts = response.split(":");
                         if (parts.length >= 4) {
                             String userId = parts[1];
@@ -106,6 +104,7 @@ public class LogInPage extends AppCompatActivity {
 
                             SharedPreferences prefs = getSharedPreferences("CampusCarePrefs", Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = prefs.edit();
+                            editor.putString("userId", userId);
                             editor.putString("userName", userName);
                             editor.putString("userRole", userRole);
                             editor.putString("email", emailStr);
@@ -114,14 +113,10 @@ public class LogInPage extends AppCompatActivity {
                             Toast.makeText(this, "Welcome, " + userName, Toast.LENGTH_SHORT).show();
 
                             Intent intent;
-                           if (userRole.equalsIgnoreCase("Admin")) {
-                                intent = new Intent(LogInPage.this,adminDashboard.class);
+                            if (userRole.equalsIgnoreCase("Admin")) {
+                                intent = new Intent(LogInPage.this, adminDashboard.class);
                             } else {
-                                intent = new Intent(LogInPage.this, OtpVerificationPage.class);
-                                intent.putExtra("userId", userId);
-                                intent.putExtra("userName", userName);
-                                intent.putExtra("userRole", userRole);
-                                intent.putExtra("email", emailStr);
+                                intent = new Intent(LogInPage.this, HomePage.class); // Replace with your actual user dashboard activity
                             }
                             startActivity(intent);
                             finish();
@@ -139,7 +134,6 @@ public class LogInPage extends AppCompatActivity {
                 error -> {
                     progressDialog.dismiss();
                     Toast.makeText(this, "Network error: " + error.getMessage(), Toast.LENGTH_LONG).show();
-
                 }
         ) {
             @Override
@@ -152,15 +146,15 @@ public class LogInPage extends AppCompatActivity {
             }
         };
 
-        // Prevent duplicate requests due to retry
         request.setRetryPolicy(new DefaultRetryPolicy(
                 5000,
-                0, // no retries
+                0,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));
 
         VolleySingleton.getInstance(this).addToRequestQueue(request);
     }
+
 
     private boolean isNetworkAvailable() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
