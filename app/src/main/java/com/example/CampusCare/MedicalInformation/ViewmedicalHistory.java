@@ -72,6 +72,7 @@ public class ViewmedicalHistory extends AppCompatActivity {
         tvDoctorNotes = findViewById(R.id.tvDoctorNotes);
         tvLabTestResults = findViewById(R.id.tvLabTestResults);
 
+
         btnUpdate = findViewById(R.id.update);
         btnDelete = findViewById(R.id.delete);
 

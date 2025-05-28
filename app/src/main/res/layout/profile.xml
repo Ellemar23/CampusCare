@@ -54,7 +54,6 @@
                 android:layout_height="wrap_content"
                 android:text="Username"
                 android:textSize="20sp"
-                android:textStyle="medium"
                 android:textColor="@android:color/black"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="4dp" />
@@ -66,7 +65,6 @@
                 android:layout_height="wrap_content"
                 android:text="user@example.com"
                 android:textSize="16sp"
-                android:textColor="@color/gray"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp" />
 
@@ -77,7 +75,6 @@
                 android:layout_height="wrap_content"
                 android:text="Role: User"
                 android:textSize="16sp"
-                android:textColor="@color/gray"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="24dp" />
 
