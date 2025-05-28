@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:background="@drawable/bg_gradient">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,19 +18,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Book an Appointment"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:letterSpacing="0.01"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- Preferred Doctor Input -->
+        <!-- Preferred Doctor -->
         <TextView
             android:id="@+id/preferredDoctorLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Preferred Doctor Name"
-            android:layout_marginTop="24dp"
+            android:textColor="#DDDDDD"
+            android:textSize="14sp"
+            android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@id/appointmentTitle"
             app:layout_constraintStart_toStartOf="parent"/>
 
@@ -37,8 +42,8 @@
             android:id="@+id/preferredDoctorInput"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@android:drawable/editbox_background"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/edittext_white_rounded"
             android:hint="Enter doctor name (optional)"
             android:padding="12dp"
             android:inputType="textPersonName"
@@ -46,13 +51,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- Appointment Date -->
+        <!-- Date -->
         <TextView
             android:id="@+id/dateLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Select Date"
-            android:layout_marginTop="24dp"
+            android:textColor="#DDDDDD"
+            android:textSize="14sp"
+            android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@id/preferredDoctorInput"
             app:layout_constraintStart_toStartOf="parent"/>
 
@@ -60,22 +67,24 @@
             android:id="@+id/dateInput"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="@android:drawable/editbox_background"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/edittext_white_rounded"
             android:focusable="false"
             android:hint="Tap to select a date"
             android:padding="12dp"
             app:layout_constraintTop_toBottomOf="@id/dateLabel"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- Time Slot -->
+        <!-- Time -->
         <TextView
             android:id="@+id/timeLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Select Time"
-            android:layout_marginTop="24dp"
+            android:textColor="#DDDDDD"
+            android:textSize="14sp"
+            android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@id/dateInput"
             app:layout_constraintStart_toStartOf="parent"/>
 
@@ -83,6 +92,9 @@
             android:id="@+id/timeSpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/spinner_glassy"
+            android:popupBackground="@color/white"
             app:layout_constraintTop_toBottomOf="@id/timeLabel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -93,7 +105,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Appointment Type"
-            android:layout_marginTop="24dp"
+            android:textColor="#DDDDDD"
+            android:textSize="14sp"
+            android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@id/timeSpinner"
             app:layout_constraintStart_toStartOf="parent"/>
 
@@ -102,7 +116,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="6dp"
             app:layout_constraintTop_toBottomOf="@id/typeLabel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -111,28 +125,44 @@
                 android:id="@+id/typeInPerson"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="In-Person"/>
+                android:text="In-Person"
+                android:buttonTint="@color/white"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/radio_glassy"
+                android:padding="8dp"/>
 
             <RadioButton
                 android:id="@+id/typeVideo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Video Call"/>
+                android:text="Video Call"
+                android:buttonTint="@color/white"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/radio_glassy"
+                android:padding="8dp"
+                android:layout_marginStart="12dp"/>
 
             <RadioButton
                 android:id="@+id/typePhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Phone Call"/>
+                android:text="Phone Call"
+                android:buttonTint="@color/white"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/radio_glassy"
+                android:padding="8dp"
+                android:layout_marginStart="12dp"/>
         </RadioGroup>
 
-        <!-- Reason for Visit -->
+        <!-- Reason -->
         <TextView
             android:id="@+id/reasonLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Reason for Visit"
-            android:layout_marginTop="24dp"
+            android:textColor="#DDDDDD"
+            android:textSize="14sp"
+            android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@id/appointmentTypeGroup"
             app:layout_constraintStart_toStartOf="parent"/>
 
@@ -140,8 +170,8 @@
             android:id="@+id/reasonInput"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@android:drawable/editbox_background"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/edittext_white_rounded"
             android:gravity="top"
             android:hint="Brief description of symptoms or reason"
             android:minLines="3"
@@ -150,17 +180,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <!-- Confirm Button -->
         <Button
             android:id="@+id/confirmButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Confirm Appointment"
-            android:layout_marginTop="32dp"
-            android:backgroundTint="@color/black"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/btn_glassy"
             app:layout_constraintTop_toBottomOf="@id/reasonInput"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
@@ -8,60 +9,53 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign Up"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:layout_marginBottom="40dp"
+            android:textColor="@android:color/white"
             android:layout_marginTop="30dp"
-            android:gravity="center" />
+            android:layout_marginBottom="40dp" />
 
+        <!-- Role -->
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Role "
-            android:textSize="20sp"
-            android:textAlignment="center"
+            android:text="Role"
+            android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_marginTop="10dp"/>
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="8dp" />
+
         <RadioGroup
             android:id="@+id/RoleTypeGroup"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
-            android:tooltipText="Role"
-            android:textAlignment="center"
-            android:layout_gravity="center">
+            android:layout_marginBottom="16dp">
 
             <RadioButton
                 android:id="@+id/typTeacher"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Teacher"
-                android:textSize="18dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginLeft="40dp"/>
+                android:buttonTint="@color/white"
+                android:textColor="@android:color/white"
+                android:layout_marginEnd="20dp" />
 
             <RadioButton
                 android:id="@+id/typeStudent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Student"
-                android:textSize="18dp"
-                android:layout_marginLeft="40dp"/>
-
-
-
-
+                android:buttonTint="@color/white"
+                android:textColor="@android:color/white" />
         </RadioGroup>
-
-
-
 
         <!-- Name -->
         <EditText
@@ -69,9 +63,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Name"
-            android:textColorHint="@color/black"
-            android:inputType="textPersonName"
-            android:layout_marginTop="10dp"
+            android:background="@android:drawable/editbox_background"
+            android:padding="12dp"
             android:layout_marginBottom="12dp" />
 
         <!-- Gender -->
@@ -80,35 +73,33 @@
             android:layout_height="wrap_content"
             android:text="Gender"
             android:textSize="18sp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="12dp"
-            android:gravity="center"
-            android:textColor="@color/black"/>
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="8dp" />
 
         <RadioGroup
             android:id="@+id/GenderTypeGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
-            android:tooltipText="Gender"
->
+            android:layout_marginBottom="16dp">
 
             <RadioButton
                 android:id="@+id/typMale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Male"
-                android:textSize="18dp"
-                android:layout_marginRight="16dp"/>
+                android:buttonTint="@color/white"
+                android:textColor="@android:color/white"
+                android:layout_marginEnd="20dp" />
 
             <RadioButton
                 android:id="@+id/typeFemale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Female"
-                android:textSize="18dp"/>
-
+                android:buttonTint="@color/white"
+                android:textColor="@android:color/white" />
         </RadioGroup>
 
         <!-- Age -->
@@ -117,9 +108,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Age"
-            android:textColorHint="@color/black"
-            android:inputType="number"
-            android:layout_marginBottom="12dp" />
+            android:background="@android:drawable/editbox_background"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp"
+            android:inputType="number" />
 
         <!-- Contact -->
         <EditText
@@ -127,10 +119,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Contact Number"
-            android:textColorHint="@color/black"
-
-            android:inputType="phone"
-            android:layout_marginBottom="12dp" />
+            android:background="@android:drawable/editbox_background"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp"
+            android:inputType="phone" />
 
         <!-- Email -->
         <EditText
@@ -138,10 +130,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
-            android:textColorHint="@color/black"
-
-            android:inputType="textEmailAddress"
-            android:layout_marginBottom="12dp" />
+            android:background="@android:drawable/editbox_background"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp"
+            android:inputType="textEmailAddress" />
 
         <!-- Password -->
         <EditText
@@ -149,10 +141,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
-            android:textColorHint="@color/black"
-
-            android:inputType="textPassword"
-            android:layout_marginBottom="12dp" />
+            android:background="@android:drawable/editbox_background"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp"
+            android:inputType="textPassword" />
 
         <!-- Confirm Password -->
         <EditText
@@ -160,10 +152,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Confirm Password"
-            android:inputType="textPassword"
-            android:textColorHint="@color/black"
-
-            android:layout_marginBottom="20dp" />
+            android:background="@android:drawable/editbox_background"
+            android:padding="12dp"
+            android:layout_marginBottom="20dp"
+            android:inputType="textPassword" />
 
         <!-- Sign Up Button -->
         <Button
@@ -171,12 +163,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sign Up"
-            android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginTop="30dp"
+            android:textSize="18sp"
             android:backgroundTint="@color/black"
-            android:textColor="#FFFFFF"
-            android:padding="12dp" />
-
+            android:textColor="@android:color/white"
+            android:elevation="6dp"
+            android:layout_marginTop="30dp"
+            android:padding="14dp"
+            android:background="@drawable/button_selector" />
     </LinearLayout>
 </ScrollView>

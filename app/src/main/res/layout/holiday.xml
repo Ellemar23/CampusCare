@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="24dp"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:background="@android:color/transparent">
 
     <EditText
         android:id="@+id/date_input"
@@ -15,34 +16,52 @@
         android:focusable="false"
         android:clickable="true"
         android:inputType="none"
-        android:padding="12dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/edit_text_rounded"
+        android:textColor="#000000"
+        android:textColorHint="#888888"
+        android:padding="12dp" />
 
     <EditText
         android:id="@+id/description_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Description"
-        android:padding="12dp"
-        android:layout_marginBottom="24dp" />
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/edit_text_rounded"
+        android:textColor="#000000"
+        android:textColorHint="#888888"
+        android:padding="12dp" />
 
     <Button
         android:id="@+id/add_holiday_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Holiday"
-        android:layout_marginBottom="12dp" />
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="#000000"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:padding="12dp" />
 
     <Button
         android:id="@+id/delete_holiday_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Delete Holiday"
-        android:layout_marginBottom="12dp" />
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="#D32F2F"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:padding="12dp" />
 
     <Button
         android:id="@+id/check_holiday_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Check Holiday" />
+        android:text="Check Holiday"
+        android:backgroundTint="#1976D2"
+       android:textColor="#FFFFFF"
+       android:textStyle="bold"
+       android:padding="12dp" />
 </LinearLayout>
