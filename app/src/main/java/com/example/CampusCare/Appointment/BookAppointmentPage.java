@@ -1,156 +1,185 @@
 package com.example.CampusCare.Appointment;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.CampusCare.R;
 import com.example.CampusCare.Endpoints.VolleySingleton;
 import com.example.CampusCare.Endpoints.endpoints;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
-//Main Coder: Pundavela
-//Delfin
+import java.util.*;
+
 public class BookAppointmentPage extends AppCompatActivity {
 
-    private Spinner doctorSpinner, timeSpinner;
-    private EditText dateInput, reasonInput;
+    private EditText dateInput, reasonInput, preferredDoctorInput;
+    private Spinner timeSpinner;
     private RadioGroup appointmentTypeGroup;
     private Button confirmButton;
+
+    private final List<String> holidayDates = new ArrayList<>();
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.appointment);
 
-        doctorSpinner = findViewById(R.id.doctorSpinner);
-        timeSpinner = findViewById(R.id.timeSpinner);
+        preferredDoctorInput = findViewById(R.id.preferredDoctorInput);
         dateInput = findViewById(R.id.dateInput);
         reasonInput = findViewById(R.id.reasonInput);
+        timeSpinner = findViewById(R.id.timeSpinner);
         appointmentTypeGroup = findViewById(R.id.appointmentTypeGroup);
         confirmButton = findViewById(R.id.confirmButton);
 
-        // Sample data
-        String[] doctors = {"Dr. Pretz Elle", "Dr. Ramirez", "Dr. Tan"};
-        String[] times = {"9:00 AM", "10:30 AM", "1:00 PM", "3:00 PM"};
+        prefs = getSharedPreferences("CampusCarePrefs", MODE_PRIVATE);
 
-        doctorSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, doctors));
+        String[] times = {"9:00 AM", "10:30 AM", "1:00 PM", "3:00 PM"};
         timeSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, times));
+
+        fetchHolidays();
 
         dateInput.setOnClickListener(v -> showDatePicker());
 
         confirmButton.setOnClickListener(v -> {
-            String doctorName = doctorSpinner.getSelectedItem().toString();
+            String preferredDoctor = preferredDoctorInput.getText().toString().trim();
             String date = dateInput.getText().toString().trim();
             String time = timeSpinner.getSelectedItem().toString();
             String reason = reasonInput.getText().toString().trim();
-
             int selectedTypeId = appointmentTypeGroup.getCheckedRadioButtonId();
 
-            if (selectedTypeId == -1 || date.isEmpty() || reason.isEmpty()) {
+            if (preferredDoctor.isEmpty() || date.isEmpty() || reason.isEmpty() || selectedTypeId == -1) {
                 Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             String type = ((RadioButton) findViewById(selectedTypeId)).getText().toString();
 
-            addAppointmentToDatabase(doctorName, date, time, type, reason);
+            if (holidayDates.contains(date)) {
+                Toast.makeText(this, "Cannot book on a holiday", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            fetchAvailableDoctorAndBook(preferredDoctor, date, time, type, reason);
         });
     }
 
+    private void fetchHolidays() {
+        StringRequest request = new StringRequest(Request.Method.GET, endpoints.holidayList,
+                response -> {
+                    try {
+                        JSONArray holidays = new JSONArray(response);
+                        for (int i = 0; i < holidays.length(); i++) {
+                            holidayDates.add(holidays.getString(i));
+                        }
+                    } catch (JSONException e) {
+                        Toast.makeText(this, "Error parsing holidays", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                error -> Toast.makeText(this, "Failed to fetch holidays", Toast.LENGTH_SHORT).show()
+        );
+        Volley.newRequestQueue(this).add(request);
+    }
+
     private void showDatePicker() {
-        final Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-        new DatePickerDialog(this, (view, year1, month1, dayOfMonth) -> {
-            // Format date as yyyy-MM-dd
-            String formattedDate = String.format("%04d-%02d-%02d", year1, month1 + 1, dayOfMonth);
-            dateInput.setText(formattedDate);
-        }, year, month, day).show();
+        Calendar calendar = Calendar.getInstance();
+        DatePickerDialog dialog = new DatePickerDialog(this,
+                (view, year, month, day) -> {
+                    String selected = String.format("%04d-%02d-%02d", year, month + 1, day);
+                    if (holidayDates.contains(selected)) {
+                        Toast.makeText(this, "Cannot book on a holiday", Toast.LENGTH_LONG).show();
+                    } else {
+                        dateInput.setText(selected);
+                    }
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH));
+        dialog.show();
     }
 
-    private void clearFields() {
-        dateInput.setText("");
-        reasonInput.setText("");
-        appointmentTypeGroup.clearCheck();
-        doctorSpinner.setSelection(0);
-        timeSpinner.setSelection(0);
+    private void fetchAvailableDoctorAndBook(String preferredDoctor, String date, String time, String type, String reason) {
+        String encodedTime = time.replace(" ", "%20");
+        String encodedPreferred = preferredDoctor.replace(" ", "%20");
+        String url = endpoints.AssignDoctor + "&time=" + encodedTime + "&preferred=" + encodedPreferred;
+
+        StringRequest request = new StringRequest(Request.Method.GET, url,
+                response -> {
+                    try {
+                        JSONObject json = new JSONObject(response);
+                        if (json.getBoolean("success")) {
+                            String assignedDoctor = json.getString("doctor_name");
+                            addAppointmentToDatabase(assignedDoctor, date, time, type, reason);
+                        } else {
+                            Toast.makeText(this, json.getString("message"), Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (JSONException e) {
+                        Toast.makeText(this, "Failed to parse doctor assignment", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                error -> Toast.makeText(this, "Doctor assignment failed", Toast.LENGTH_LONG).show()
+        );
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        VolleySingleton.getInstance(this).addToRequestQueue(request);
     }
+
 
     private void addAppointmentToDatabase(String doctorName, String date, String time, String type, String reason) {
-        SharedPreferences prefs = getSharedPreferences("CampusCarePrefs", MODE_PRIVATE);
         String userId = prefs.getString("user_id", "-1");
-
-        if (userId.equals("-1")) {
-            Toast.makeText(this, "User not logged in.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Log.d("BookAppointment", "Sending params: user_id=" + userId + ", doctor_name=" + doctorName + ", date=" + date + ", time=" + time + ", type=" + type + ", reason=" + reason);
+        String userName = prefs.getString("user_name", "User");
 
         StringRequest request = new StringRequest(Request.Method.POST, endpoints.AddAppointment,
                 response -> {
-                    Log.d("ServerResponse", "Raw: " + response);
                     try {
-                        JSONObject jsonResponse = new JSONObject(response);
-                        boolean success = jsonResponse.getBoolean("success");
-                        String message = jsonResponse.getString("message");
-
-                        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-
-                        if (success) {
+                        JSONObject json = new JSONObject(response);
+                        if (json.getBoolean("success")) {
+                            Toast.makeText(this, "Appointment booked successfully", Toast.LENGTH_LONG).show();
                             clearFields();
-                            Intent intent = new Intent(BookAppointmentPage.this, AppointmentList.class);
-                            startActivity(intent);
+                        } else {
+                            Toast.makeText(this, json.getString("message"), Toast.LENGTH_LONG).show();
                         }
-                    } catch (Exception e) {
-                        Toast.makeText(this, "Invalid server response", Toast.LENGTH_SHORT).show();
-                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        Toast.makeText(this, "Response parsing failed", Toast.LENGTH_SHORT).show();
                     }
                 },
-                error -> {
-                    String errMsg = error.getMessage();
-                    if (errMsg == null) {
-                        if (error.networkResponse != null) {
-                            errMsg = "HTTP Error code: " + error.networkResponse.statusCode;
-                        } else {
-                            errMsg = "Unknown error occurred";
-                        }
-                    }
-                    Toast.makeText(this, "Save failed: " + errMsg, Toast.LENGTH_LONG).show();
-                }
+                error -> Toast.makeText(this, "Appointment booking failed", Toast.LENGTH_LONG).show()
         ) {
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("user_id", userId);
-                params.put("doctor_name", doctorName);
-                params.put("date", date);
-                params.put("time", time);
-                params.put("type", type);
-                params.put("reason", reason);
-                return params;
+                Map<String, String> map = new HashMap<>();
+                map.put("action", "add");
+                map.put("user_id", userId);
+                map.put("username", userName);
+                map.put("doctor_name", doctorName);
+                map.put("date", date);
+                map.put("time", time);
+                map.put("type", type);
+                map.put("reason", reason);
+                return map;
             }
         };
 
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                10000,  // 10 seconds timeout
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
         VolleySingleton.getInstance(this).addToRequestQueue(request);
+    }
+
+    private void clearFields() {
+        preferredDoctorInput.setText("");
+        dateInput.setText("");
+        reasonInput.setText("");
+        appointmentTypeGroup.clearCheck();
+        timeSpinner.setSelection(0);
     }
 }

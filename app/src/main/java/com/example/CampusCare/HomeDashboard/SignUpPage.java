@@ -49,6 +49,12 @@ public class SignUpPage extends AppCompatActivity {
             String Age = age.getText().toString().trim();
             String Contact = contact.getText().toString().trim();
 
+            int AGE = Integer.parseInt(Age);
+            if (AGE < 1 || AGE >120){
+                age.setError("INVALID AGE");
+                return;
+            }
+
             // Get selected gender RadioButton text
             int selectedGenderId = genderGroup.getCheckedRadioButtonId();
             if (selectedGenderId == -1) {

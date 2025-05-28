@@ -44,15 +44,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
     public void onBindViewHolder(HistoryViewHolder holder, int position) {
         HistoryModel item = historyList.get(position);
 
-        // Set the activity type (Appointment or Medical Info)
         holder.doctorName.setText(item.getType());
 
         // Set date and time
         holder.tvDate.setText(item.getDate());
         holder.tvTime.setText(item.getTime());
 
-        // Optional: if you have extra details to show
-        // If details exist, show the TextView, else hide it
+
     }
 
     @Override

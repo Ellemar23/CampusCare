@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.example.CampusCare.ADMIN.adminDashboard;
 import com.example.CampusCare.R;
 import com.example.CampusCare.Endpoints.VolleySingleton;
 import com.example.CampusCare.Endpoints.endpoints;
@@ -112,11 +113,16 @@ public class LogInPage extends AppCompatActivity {
 
                             Toast.makeText(this, "Welcome, " + userName, Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(LogInPage.this, OtpVerificationPage.class);
-                            intent.putExtra("userId", userId);
-                            intent.putExtra("userName", userName);
-                            intent.putExtra("userRole", userRole);
-                            intent.putExtra("email", emailStr);
+                            Intent intent;
+                           if (userRole.equalsIgnoreCase("Admin")) {
+                                intent = new Intent(LogInPage.this,adminDashboard.class);
+                            } else {
+                                intent = new Intent(LogInPage.this, OtpVerificationPage.class);
+                                intent.putExtra("userId", userId);
+                                intent.putExtra("userName", userName);
+                                intent.putExtra("userRole", userRole);
+                                intent.putExtra("email", emailStr);
+                            }
                             startActivity(intent);
                             finish();
                         } else {

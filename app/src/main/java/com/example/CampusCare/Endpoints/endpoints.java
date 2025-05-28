@@ -3,7 +3,7 @@ package com.example.CampusCare.Endpoints;
 
 //MAIN Coder: Pundavela
 public class endpoints {
-    private static final String BASE_URL = "http://192.168.0.107/CampusCare/"; // Replace with your WAMP IP & folder
+    private static final String BASE_URL = "http://192.168.0.106/CampusCare/"; // Replace with your WAMP IP & folder
 
 
     public static final String LOGIN = BASE_URL + "login.php?action=login";
@@ -31,6 +31,18 @@ public class endpoints {
 
 
     public static final String history = BASE_URL + "history.php";
+
+
+    public static final String InsertDoctor = BASE_URL + "doctors.php?action=insert";
+    public static final String FetchDoctors = BASE_URL + "doctors.php?action=fetch";
+    public static final String UpdateDoctorAvailability = BASE_URL + "doctors.php?action=update";
+    public static final String AssignDoctor = BASE_URL + "doctors.php?action=assign";
+
+    public static final String AddHoliday = BASE_URL + "holiday.php?action=add";
+    public static final String DeleteHoliday = BASE_URL + "holiday.php?action=delete";
+    public static final String CheckHoliday = BASE_URL + "holiday.php?action=check";
+    public static final String holidayList = BASE_URL + "holiday.php?action=list";
+
 
 
 

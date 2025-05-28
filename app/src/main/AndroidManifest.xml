@@ -50,6 +50,10 @@
         <activity android:name="com.example.CampusCare.Profile.DeleteAccount" />
         <activity android:name="com.example.CampusCare.HomeDashboard.AboutUs" />
         <activity android:name="com.example.CampusCare.HealthInfo.EditHealthInfoPage" />
+        <activity android:name="com.example.CampusCare.ADMIN.adminDashboard" />
+        <activity android:name="com.example.CampusCare.ADMIN.adminDoctorAvail" />
+        <activity android:name="com.example.CampusCare.ADMIN.adminHoliday" />
+
 
 
 

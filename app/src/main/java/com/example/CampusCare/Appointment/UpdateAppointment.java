@@ -15,6 +15,7 @@ import com.example.CampusCare.R;
 import com.example.CampusCare.Endpoints.VolleySingleton;
 import com.example.CampusCare.Endpoints.endpoints;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Calendar;
@@ -24,8 +25,8 @@ import java.util.Map;
 
 public class UpdateAppointment extends AppCompatActivity {
 
-    private Spinner doctorSpinner, timeSpinner;
-    private EditText dateInput, reasonInput;
+    private Spinner timeSpinner;
+    private EditText dateInput, reasonInput, doctorInput;
     private RadioGroup appointmentTypeGroup;
     private Button updateButton;
     private int appointmentId = -1;
@@ -42,7 +43,7 @@ public class UpdateAppointment extends AppCompatActivity {
         progressDialog.setMessage("updating in...");
         progressDialog.setCancelable(false);
 
-        doctorSpinner = findViewById(R.id.doctorSpinner);
+        doctorInput = findViewById(R.id.doctorInput);
         timeSpinner = findViewById(R.id.timeSpinner);
         dateInput = findViewById(R.id.dateInput);
         reasonInput = findViewById(R.id.reasonInput);
@@ -50,10 +51,8 @@ public class UpdateAppointment extends AppCompatActivity {
         updateButton = findViewById(R.id.confirmButton);
         updateButton.setText("Update");
 
-        String[] doctors = {"Dr. Smith", "Dr. Ramirez", "Dr. Tan"};
         String[] times = {"9:00 AM", "10:30 AM", "1:00 PM", "3:00 PM"};
 
-        doctorSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, doctors));
         timeSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, times));
 
         dateInput.setOnClickListener(v -> showDatePicker());
@@ -67,7 +66,7 @@ public class UpdateAppointment extends AppCompatActivity {
         reason = intent.getStringExtra("reason");
 
         // Pre-fill values
-        if (doctorName != null) doctorSpinner.setSelection(getIndex(doctorSpinner, doctorName));
+        if (doctorName != null) doctorInput.setText(doctorName);
         if (originalDate != null) dateInput.setText(originalDate);
         if (time != null) timeSpinner.setSelection(getIndex(timeSpinner, time));
         if (reason != null) reasonInput.setText(reason);
@@ -81,10 +80,12 @@ public class UpdateAppointment extends AppCompatActivity {
             }
         }
 
+
+
         fetchAppointmentId();
 
         updateButton.setOnClickListener(v -> {
-            String newDoctor = doctorSpinner.getSelectedItem().toString();
+            String newDoctor = doctorInput.getText().toString().trim();
             String newDate = dateInput.getText().toString().trim();
             String newTime = timeSpinner.getSelectedItem().toString();
             String newReason = reasonInput.getText().toString().trim();
@@ -98,7 +99,7 @@ public class UpdateAppointment extends AppCompatActivity {
             String newType = ((RadioButton) findViewById(selectedTypeId)).getText().toString();
 
             if (appointmentId != -1) {
-                updateAppointmentInDatabase(appointmentId, newDoctor, newDate, newTime, newType, newReason);
+                fetchAvailableDoctorAndBook(newDoctor, newDate, newTime, newType, newReason);
             } else {
                 Toast.makeText(this, "Appointment ID not yet loaded. Try again shortly.", Toast.LENGTH_SHORT).show();
             }
@@ -157,6 +158,34 @@ public class UpdateAppointment extends AppCompatActivity {
         };
 
         request.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, 1.0f));
+        VolleySingleton.getInstance(this).addToRequestQueue(request);
+    }
+
+    private void fetchAvailableDoctorAndBook(String preferredDoctor, String date, String time, String type, String reason) {
+        String encodedTime = time.replace(" ", "%20");
+        String encodedPreferred = preferredDoctor.replace(" ", "%20");
+        String url = endpoints.AssignDoctor + "&time=" + encodedTime + "&preferred=" + encodedPreferred;
+
+        StringRequest request = new StringRequest(Request.Method.GET, url,
+                response -> {
+                    try {
+                        JSONObject json = new JSONObject(response);
+                        if (json.getBoolean("success")) {
+                            String assignedDoctor = json.getString("doctor_name");
+                            updateAppointmentInDatabase(appointmentId,assignedDoctor,date, time, type, reason);
+                        } else {
+                            Toast.makeText(this, json.getString("message"), Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (JSONException e) {
+                        Toast.makeText(this, "Failed to parse doctor assignment", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                error -> Toast.makeText(this, "Doctor assignment failed", Toast.LENGTH_LONG).show()
+        );
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         VolleySingleton.getInstance(this).addToRequestQueue(request);
     }
 
