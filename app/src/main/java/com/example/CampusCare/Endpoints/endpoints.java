@@ -3,7 +3,7 @@ package com.example.CampusCare.Endpoints;
 
 //MAIN Coder: Pundavela
 public class endpoints {
-    private static final String BASE_URL = "http://192.168.0.106/CampusCare/"; // Replace with your WAMP IP & folder
+    private static final String BASE_URL = "http://192.168.172.179/CampusCare/"; // Replace with your WAMP IP & folder
 
 
     public static final String LOGIN = BASE_URL + "login.php?action=login";

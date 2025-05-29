@@ -118,8 +118,16 @@ public class SignUpPage extends AppCompatActivity {
                     }
                     progressDialog.dismiss();
                 },
+                error -> {
+                    progressDialog.dismiss();
+                    if (error.networkResponse != null) {
+                        String body = new String(error.networkResponse.data);
+                        Toast.makeText(this, "Server Error: " + body, Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(this, "Network Error: " + error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }
 
-                error -> Toast.makeText(this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show()
         ) {
             @Override
             protected Map<String, String> getParams() {
@@ -136,10 +144,11 @@ public class SignUpPage extends AppCompatActivity {
             }
         };
         request.setRetryPolicy(new DefaultRetryPolicy(
-                5000,
-                0,
+                20000, // ⬅️ 20 seconds timeout
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));
+
 
         VolleySingleton.getInstance(this).addToRequestQueue(request);
     }
